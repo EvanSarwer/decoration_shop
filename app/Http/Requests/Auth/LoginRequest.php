@@ -46,14 +46,27 @@ class LoginRequest extends FormRequest
         $user = User::where('email', $this->username_email)
                         ->orWhere('username', $this->username_email)
                         ->first();
-
-        if ( !$user || !Hash::check($this->password,$user->password)) {
-            RateLimiter::hit($this->throttleKey());
-
+        if(!$user){
             throw ValidationException::withMessages([
                 'username_email' => trans('auth.failed'),
             ]);
+        }else{
+
+            if ( !Hash::check($this->password,$user->password)) {
+                RateLimiter::hit($this->throttleKey());
+    
+                throw ValidationException::withMessages([
+                    'username_email' => trans('auth.failed'),
+                ]);
+            }else{
+                if($user->status === 'inactive'){
+                    throw ValidationException::withMessages([
+                        'username_email' => "Your account deactivated",
+                    ]);
+                }
+            }
         }
+        
 
         // if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
         //     RateLimiter::hit($this->throttleKey());

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('text3')->nullable();
             $table->double('price');
             $table->double('offer_percent')->default(0);
+            $table->string('ready_time')->nullable();
             $table->enum('featuring',['yes','no'])->default('no');
             $table->string('image1');
             $table->string('image2')->nullable();

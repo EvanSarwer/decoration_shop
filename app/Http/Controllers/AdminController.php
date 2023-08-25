@@ -2,16 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
     public function AdminDashboard(){
-        return view('admin.index');
+        $user_id = Auth::user()->id;
+        $messages = Notification::where('user_id',$user_id)->where('type','message')->latest()->get();
+        if(count($messages) > 0){
+            foreach($messages as $mm){
+                $mm->deliver_time = Carbon::parse($mm->created_at)->diffForHumans();
+                if($mm->message != null){
+                    $mm->message = json_decode($mm->message);
+                }
+            }
+        }
+
+        $app_users = User::all();
+        return view('admin.index',compact('messages','app_users'));
     }
 
 
@@ -107,4 +121,97 @@ class AdminController extends Controller
         return back()->with($notification);
 
     }
+
+    public function MessageSeen(){
+        $user_id = Auth::user()->id;
+        $unseen_messages = Notification::where('user_id',$user_id)->where('type','message')->where('status','unseen')->latest()->get();
+        if(count($unseen_messages) > 0){
+            foreach($unseen_messages as $message){
+                $message->status = 'seen';
+                $message->save();
+            }
+        }
+        return back();
+    }
+
+    public function AppUserCreateView(){
+        return view('admin.appUser_create');
+    }
+
+    public function AppUserCreatePost(Request $request){
+        // Validation
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required|unique:users,username|min:4',
+            'email' => 'required|unique:users,email|min:6',
+            'password' => 'required|min:6',
+            'phone' => 'required|min:11',
+        ]);
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->save();
+
+        $notification = array(
+            'message' => 'New User Created Successfully',
+            'alert-type' => 'success',
+        );
+
+        return redirect('/admin/dashboard')->with($notification);
+
+
+    }
+
+
+    public function AppUserEditView($id){
+        $app_user = User::findOrFail($id);
+        return view('admin.appUser_edit',compact('app_user'));
+    }
+
+    public function AppUserEditPost(Request $request){
+        $request->validate([
+            'id' => 'required',
+            'name' => 'required',
+            'username' => 'required|min:4|unique:users,username,'.$request->id,
+            'email' => 'required|min:6|unique:users,email,'.$request->id,
+            'phone' => 'required|min:11',
+        ]);
+
+        $user = User::findOrFail($request->id);
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        if($request->password){
+            $user->password = Hash::make($request->password);
+        }
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->save();
+
+        $notification = array(
+            'message' => 'User Info Updated Successfully',
+            'alert-type' => 'success',
+        );
+
+        return redirect('/admin/dashboard')->with($notification);
+    }
+
+    public function AppUserStatusUpdate($id, $status){
+        $app_user = User::findOrFail($id);
+        if($status === 'active'){
+            $app_user->status = 'active';
+        }else if($status === 'inactive'){
+            $app_user->status = 'inactive';
+        }
+        $app_user->save();
+
+        return back();
+    }
+
+
 }
