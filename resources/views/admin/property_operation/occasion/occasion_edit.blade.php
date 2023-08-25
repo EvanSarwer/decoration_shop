@@ -55,7 +55,7 @@
                             <div class="pt-2">
                             <input x-on:change="productImage1 = URL.createObjectURL($event.target.files[0])" name="image1" type="file" class="form-control @error('image1') is-invalid @enderror" id="image1">
                             @error('image1')
-                              <span class="text-danger">{{ $message }}</span>
+                              <span class="text-danger">{{ $message }}</span> 
                             @enderror
                             </div>
                         </div>

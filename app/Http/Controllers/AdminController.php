@@ -54,8 +54,16 @@ class AdminController extends Controller
 
     public function AdminProfileUpdate(Request $request){
         $user_id = Auth::user()->id;
-        $userData = User::find($user_id);
 
+        // Validation
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required|min:4|unique:users,username,'.$user_id,
+            'email' => 'required|min:6|unique:users,email,'.$user_id,
+            'phone' => 'required|min:11',
+        ]);
+
+        $userData = User::find($user_id);
         $userData->name = $request->name;
         $userData->username = $request->username;
         $userData->email = $request->email;
