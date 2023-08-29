@@ -16,21 +16,20 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="{{ route('index') }}" class="nav-item nav-link">Home</a>
-                <a href="about.html" class="nav-item nav-link">Balloons</a>
-                <a href="service.html" class="nav-item nav-link active">Occasion</a>
+                <a href="{{ route('balloons') }}" class="nav-item nav-link">Balloons</a>
+                <a href="{{ route('occasions') }}" class="nav-item nav-link active">Occasion</a>
                 <a href="{{ route('seasonal.holidays') }}" class="nav-item nav-link">Seasonal & Holidays</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu fade-up m-0">
-                        <a href="booking.html" class="dropdown-item">Booking</a>
-                        <a href="team.html" class="dropdown-item">Technicians</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                        <a href="404.html" class="dropdown-item">404 Page</a>
+                        <!-- <a href="booking.html" class="dropdown-item">Booking</a> -->
+                        <a href="{{ route('admin.login') }}" class="dropdown-item">Login</a>
+                        <a href="{{ route('404') }}" class="dropdown-item">404 Page</a>
                     </div>
                 </div>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
             </div>
-            <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Get A Quote<i class="fa fa-arrow-right ms-3"></i></a>
+            <div class="py-4 px-lg-5 d-none d-lg-block"></div>
         </div>
     </nav>
     <!-- Navbar End -->
@@ -55,7 +54,7 @@
 
                     <h6>Ready Time <span style="color: deepPink;">– {{$occasion->ready_time  ?? 'Not available'}}</span></h6>
                     <h1 class="mb-4">{{$occasion->title ?? 'Not available'}}</h1>
-                    <p class="mb-4">{{$occasion->description ?? ''}}</p>
+                    <!-- <p class="mb-4">{{$occasion->description ?? ''}}</p> -->
                     <div class="row g-2 mb-1 pb-4">
                         <div class="col-12 wow fadeIn" data-wow-delay="0.1s">
                             <div class="d-flex">
@@ -82,7 +81,7 @@
                             <h3>${{ number_format($occasion->price, 2) }} </h3>
                         @endif
                         
-                        <a href="whatsapp://send?phone=+8807365645466&text=I want to know about this product&url=http://127.0.0.1:8000/single-occasion/{{$occasion->id}}" target="_blank" class="btn btn-success rounded-pill py-2 mt-4 px-4 d-flex align-items-center justify-content-center mb-3"
+                        <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($occasion->title) }}%0APrice%3A%20%24{{ ($occasion->offer_percent > 0) ? (number_format($occasion->price - ($occasion->price * ($occasion->offer_percent / 100)), 2)) : (number_format($occasion->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('single.occasion', $occasion->id)) }}" target="_blank" class="btn btn-success rounded-pill py-2 mt-4 px-4 d-flex align-items-center justify-content-center mb-3"
                             style="position: relative; overflow: hidden; background: linear-gradient(135deg, #3498db, #e74c3c); border: none; transition: transform 0.2s, filter 0.2s; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); margin-top: 20px;">
                             <span style="display: inline-flex; align-items: center; color: white;">
                                 <i class="bi bi-whatsapp me-2" style="font-size: 1.5rem;"></i> <!-- WhatsApp Icon -->
@@ -184,7 +183,7 @@
                                 <input type="text" name="phone" id="phone" class="phone form-control border-0" value="{{ old('phone') }}" placeholder="Your Phone" style="height: 55px;">
                                 </div>
                                 <div class="col-12">
-                                    <textarea class="message form-control border-0" name="message" id="message" placeholder="Special Request"></textarea>
+                                    <textarea class="message form-control border-0" name="message" id="message" placeholder="Special Request">{{ old('message') }}</textarea>
                                 </div>
                                 <ul id="saveform_errList"></ul>
                                 <div class="col-12">

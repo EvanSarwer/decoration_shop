@@ -48,17 +48,23 @@
                       <!-- <th scope="row">{{ $message->id }}</th> -->
                       <td>{{ $message->message->name ?? 'Not available' }}</td>
                       <td>{{ $message->message->email ?? 'Email not available' }} </br> {{ $message->message->phone ?? 'Phone not available' }}</td>
-                      <td>{{ $message->message->message ?? 'Not available' }}</td>
                       <td>
-                        @if($message->message->product_type)
-                          @if($message->message->product_type === 'balloon')
-                            <a href="{{ route('single.balloon', $message->message->product_id) }}" target="_blank">See Product</a>
-                          @elseif($message->message->product_type === 'occasion')
-                            <a href="{{ route('single.occasion', $message->message->product_id) }}" target="_blank">See Product</a> 
-                          @endif            
+                        @if ($message->status === 'unseen')
+                          <b>{{$message->message->message ?? 'Not available'}}</b>
                         @else
-                          Not Available
+                          {{$message->message->message ?? 'Not available'}}
                         @endif
+                      </td>
+                      <td>
+                      @if(isset($message->message->product_type) && !empty($message->message->product_type))
+                          @if($message->message->product_type === 'balloon')
+                              <a href="{{ route('single.balloon', $message->message->product_id) }}" target="_blank">See Product</a>
+                          @elseif($message->message->product_type === 'occasion')
+                              <a href="{{ route('single.occasion', $message->message->product_id) }}" target="_blank">See Product</a> 
+                          @endif            
+                      @else
+                          Not Available
+                      @endif
                       </td>
                       <td>{{ $message->created_at }} </br> {{ $message->deliver_time }}</td>
                     </tr>

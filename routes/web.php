@@ -29,14 +29,19 @@ use App\Http\Controllers\PropertyOperationController;
 /////// Main Landing Page Routes
 
 Route::get('/', [LandingPageController::class, 'index'])->name('index');
-
 Route::post('/bookmessage', [LandingPageController::class, 'bookMessage'])->name('book.message');
+Route::post('/sendmessage', [LandingPageController::class, 'sendMessage'])->name('send.message');
 
+Route::get('/balloons', [LandingPageController::class, 'balloons'])->name('balloons');
 Route::get('/single-balloon/{id}', [LandingPageController::class, 'singleBalloon'])->name('single.balloon');
 
+Route::get('/occasions', [LandingPageController::class, 'occasions'])->name('occasions');
 Route::get('/single-occasion/{id}', [LandingPageController::class, 'singleOccasion'])->name('single.occasion');
 
 Route::get('/seasonal-holidays', [LandingPageController::class, 'seasonalHolidays'])->name('seasonal.holidays');
+
+Route::get('/contact', [LandingPageController::class, 'contact'])->name('contact');
+Route::get('/404', [LandingPageController::class, 'error404'])->name('404');
 
 
 

@@ -3,8 +3,6 @@
 
 
 
-
-
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
         <a href="{{ route('index') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
@@ -16,21 +14,20 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="{{ route('index') }}" class="nav-item nav-link active">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
-                <a href="service.html" class="nav-item nav-link">Services</a>
+                <a href="{{ route('balloons') }}" class="nav-item nav-link">Balloons</a>
+                <a href="{{ route('occasions') }}" class="nav-item nav-link">Occasion</a>
                 <a href="{{ route('seasonal.holidays') }}" class="nav-item nav-link">Seasonal & Holidays</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu fade-up m-0">
-                        <a href="booking.html" class="dropdown-item">Booking</a>
-                        <a href="team.html" class="dropdown-item">Technicians</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                        <a href="404.html" class="dropdown-item">404 Page</a>
+                        <!-- <a href="booking.html" class="dropdown-item">Booking</a> -->
+                        <a href="{{ route('admin.login') }}" class="dropdown-item">Login</a>
+                        <a href="{{ route('404') }}" class="dropdown-item">404 Page</a>
                     </div>
                 </div>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
             </div>
-            <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Get A Quote<i class="fa fa-arrow-right ms-3"></i></a>
+            <div class="py-4 px-lg-5 d-none d-lg-block"></div>
         </div>
     </nav>
     <!-- Navbar End -->
@@ -107,7 +104,7 @@
                         <!-- <h5 class="mb-0">Client Name</h5>
                         <p>Profession</p> -->
                         <div class="testimonial-text bg-light p-2">
-                          <h4 class="pl-3">{{ $balloon->title }}</h4>
+                          <a href="{{ route('single.balloon', $balloon->id) }}" ><h4 class="pl-3">{{ $balloon->title }}</h4></a>
                           <div class="row">
                             <div class="col-6">
 
@@ -131,7 +128,7 @@
                               @if ($balloon->offer_percent > 0)
                                 <span class="badge text-danger">{{ $balloon->offer_percent }}% Offer</span>
                               @endif
-                              <a href="#" class="btn btn-warning btn-sm d-flex align-items-center justify-content-center"
+                              <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($balloon->title) }}%0APrice%3A%20%24{{ ($balloon->offer_percent > 0) ? (number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2)) : (number_format($balloon->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('single.balloon', $balloon->id)) }}" target="_blank" class="btn btn-warning btn-sm d-flex align-items-center justify-content-center"
                                 style="border-radius: 50px; transition: background-color 0.3s; position: relative; overflow: hidden; background: linear-gradient(135deg, #ff9800, #ff5722); border: none; box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);">
                                   <span style="display: inline-flex; align-items: center; color: white;">
                                       <i class="bi bi-whatsapp me-2" style="font-size: 25px;"></i> <!-- WhatsApp Icon -->
@@ -442,10 +439,12 @@
             <div class="speaker" style="width: 340px;" data-aos="fade-up" data-aos-delay="100">
               <img src="{{ (!empty($holidays[0]->image1)) ? url('upload/holiday_images/'.$holidays[0]->image1) : url('upload/No_Image_Available.jpg') }}" alt="Speaker 1" class="img-fluid" style="width: 340px; height: 300px; object-fit: cover;">
               <div class="details">
-                  <h3><a href="speaker-details.html">{{$holidays[0]->title ?? 'Not Available'}}</a></h3>
+                  <h3><a href="{{ route('seasonal.holidays') }}">{{$holidays[0]->title ?? 'Not Available'}}</a></h3>
                   <p>See Our Selection</p>
                   <div class="social">
-                      <a href="" class="btn btn-outline-success"><i class="bi bi-whatsapp"></i></a>
+                  @if(count($holidays)>0)
+                      <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($holidays[0]->title) }}%0APrice%3A%20%24{{ ($holidays[0]->offer_percent > 0) ? (number_format($holidays[0]->price - ($holidays[0]->price * ($holidays[0]->offer_percent / 100)), 2)) : (number_format($holidays[0]->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('seasonal.holidays')) }}" target="_blank" class="btn btn-outline-success"><i class="bi bi-whatsapp"></i></a>
+                    @endif
                   </div>
               </div>
             </div>
@@ -453,11 +452,13 @@
             <div class="speaker" style="width: 340px;" data-aos="fade-up" data-aos-delay="100">
               <img src="{{ (!empty($holidays[1]->image1)) ? url('upload/holiday_images/'.$holidays[1]->image1) : url('upload/No_Image_Available.jpg') }}" alt="Speaker 1" class="img-fluid" style="width: 340px; height: 300px; object-fit: cover;">
               <div class="details">
-                  <h3><a href="speaker-details.html">{{$holidays[1]->title ?? 'Not Available'}}</a></h3>
+                  <h3><a href="{{ route('seasonal.holidays') }}">{{$holidays[1]->title ?? 'Not Available'}}</a></h3>
                   <p>See Our Selection</p>
                   <div class="social">
-                      <a href="" class="btn btn-outline-success"><i class="bi bi-whatsapp"></i></a>
-                  </div>
+                  @if(count($holidays)>1)
+                      <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($holidays[1]->title) }}%0APrice%3A%20%24{{ ($holidays[1]->offer_percent > 0) ? (number_format($holidays[1]->price - ($holidays[1]->price * ($holidays[1]->offer_percent / 100)), 2)) : (number_format($holidays[1]->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('seasonal.holidays')) }}" target="_blank" class="btn btn-outline-success"><i class="bi bi-whatsapp"></i></a>
+                  @endif
+                    </div>
               </div>
             </div>
 
@@ -471,7 +472,7 @@
           
             <h1 class="mt-4">Holiday Balloons</h1>
             <p>holiday, and style. Find all your latex, foil, and helium balloons. We can deliver as fast as same day!</p>
-            <a href="packages.html" class="btn rounded-pill" style="margin-top: 10px; background-color: deeppink; border-color: deeppink; transition: background-color 0.3s; position: relative; overflow: hidden; box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);">
+            <a href="{{ route('seasonal.holidays') }}" class="btn rounded-pill" style="margin-top: 10px; background-color: deeppink; border-color: deeppink; transition: background-color 0.3s; position: relative; overflow: hidden; box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);">
                 <span style="position: relative; display: inline-block; padding: 10px 20px; color: white; z-index: 2;">Shop Holiday Balloons</span>
                 <span style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #ff6f61, #ffda6b, #4a90e2, #b52b65); z-index: 1; transform: scaleX(0); transform-origin: 0 50%; transition: transform 0.3s;"></span>
             </a>
@@ -488,22 +489,26 @@
             <div class="speaker" style="width: 340px;" data-aos="fade-up" data-aos-delay="100">
               <img src="{{ (!empty($holidays[2]->image1)) ? url('upload/holiday_images/'.$holidays[2]->image1) : url('upload/No_Image_Available.jpg') }}" alt="Speaker 1" class="img-fluid" style="width: 340px; height: 300px; object-fit: cover;">
               <div class="details">
-                  <h3><a href="speaker-details.html">{{$holidays[2]->title ?? 'Not Available'}}</a></h3>
+                  <h3><a href="{{ route('seasonal.holidays') }}">{{$holidays[2]->title ?? 'Not Available'}}</a></h3>
                   <p>See Our Selection</p>
                   <div class="social">
-                      <a href="" class="btn btn-outline-success"><i class="bi bi-whatsapp"></i></a>
-                  </div>
+                  @if(count($holidays)>2)
+                      <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($holidays[2]->title) }}%0APrice%3A%20%24{{ ($holidays[2]->offer_percent > 0) ? (number_format($holidays[2]->price - ($holidays[2]->price * ($holidays[2]->offer_percent / 100)), 2)) : (number_format($holidays[2]->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('seasonal.holidays')) }}" target="_blank" class="btn btn-outline-success"><i class="bi bi-whatsapp"></i></a>
+                  @endif
+                    </div>
               </div>
             </div>
 
             <div class="speaker" style="width: 340px;" data-aos="fade-up" data-aos-delay="100">
               <img src="{{ (!empty($holidays[3]->image1)) ? url('upload/holiday_images/'.$holidays[3]->image1) : url('upload/No_Image_Available.jpg') }}" alt="Speaker 1" class="img-fluid" style="width: 340px; height: 300px; object-fit: cover;">
               <div class="details">
-                  <h3><a href="speaker-details.html">{{$holidays[3]->title ?? 'Not Available'}}</a></h3>
+                  <h3><a href="{{ route('seasonal.holidays') }}">{{$holidays[3]->title ?? 'Not Available'}}</a></h3>
                   <p>See Our Selection</p>
                   <div class="social">
-                      <a href="" class="btn btn-outline-success"><i class="bi bi-whatsapp"></i></a>
-                  </div>
+                  @if(count($holidays)>3)
+                      <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($holidays[3]->title) }}%0APrice%3A%20%24{{ ($holidays[3]->offer_percent > 0) ? (number_format($holidays[3]->price - ($holidays[3]->price * ($holidays[3]->offer_percent / 100)), 2)) : (number_format($holidays[3]->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('seasonal.holidays')) }}" target="_blank" class="btn btn-outline-success"><i class="bi bi-whatsapp"></i></a>
+                  @endif
+                    </div>
               </div>
             </div>
 
@@ -661,7 +666,7 @@
                           <div class="hotel-img">
                             <img src="{{ (!empty($balloon->image1)) ? url('upload/balloon_images/'.$balloon->image1) : url('upload/No_Image_Available.jpg') }}" style="width: 300px; max-height: 300px; min-height: 300px; object-fit: cover;" alt="Hotel 1" class="img-fluid">
                           </div>
-                          <h3><a href="#">{{$balloon->title ?? 'Not Available'}}</a></h3>
+                          <h3><a href="{{ route('single.balloon', $balloon->id) }}">{{$balloon->title ?? 'Not Available'}}</a></h3>
                           <p style="font-size: 20px;">
                             @if ($balloon->offer_percent > 0)
                               <span>
@@ -673,7 +678,7 @@
                               ${{ number_format($balloon->price, 2) }}
                             @endif
                           </p>
-                          <a href="#" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
+                          <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($balloon->title) }}%0APrice%3A%20%24{{ ($balloon->offer_percent > 0) ? (number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2)) : (number_format($balloon->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('single.balloon', $balloon->id)) }}" target="_blank" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
                             style="position: relative; overflow: hidden; background: linear-gradient(135deg, #3498db, #e74c3c); border: none; transition: transform 0.2s, filter 0.2s; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
                               <span style="display: inline-flex; align-items: center; color: white;">
                                   <i class="bi bi-whatsapp me-2" style="font-size: 1.5rem;"></i> <!-- WhatsApp Icon -->
@@ -710,7 +715,7 @@
                         <div class="hotel-img">
                           <img src="{{ (!empty($balloon->image1)) ? url('upload/balloon_images/'.$balloon->image1) : url('upload/No_Image_Available.jpg') }}" style="width: 300px; max-height: 300px; min-height: 300px; object-fit: cover;" alt="Hotel 1" class="img-fluid">
                         </div>
-                        <h3><a href="#">{{$balloon->title ?? 'Not Available'}}</a></h3>
+                        <h3><a href="{{ route('single.balloon', $balloon->id) }}">{{$balloon->title ?? 'Not Available'}}</a></h3>
                         <p style="font-size: 20px;">
                           @if ($balloon->offer_percent > 0)
                             <span>
@@ -722,7 +727,7 @@
                             ${{ number_format($balloon->price, 2) }}
                           @endif
                         </p>
-                        <a href="#" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
+                        <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($balloon->title) }}%0APrice%3A%20%24{{ ($balloon->offer_percent > 0) ? (number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2)) : (number_format($balloon->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('single.balloon', $balloon->id)) }}" target="_blank" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
                           style="position: relative; overflow: hidden; background: linear-gradient(135deg, #3498db, #e74c3c); border: none; transition: transform 0.2s, filter 0.2s; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
                             <span style="display: inline-flex; align-items: center; color: white;">
                                 <i class="bi bi-whatsapp me-2" style="font-size: 1.5rem;"></i> <!-- WhatsApp Icon -->
@@ -759,7 +764,7 @@
                         <div class="hotel-img">
                           <img src="{{ (!empty($balloon->image1)) ? url('upload/balloon_images/'.$balloon->image1) : url('upload/No_Image_Available.jpg') }}" style="width: 300px; max-height: 300px; min-height: 300px; object-fit: cover;" alt="Hotel 1" class="img-fluid">
                         </div>
-                        <h3><a href="#">{{$balloon->title ?? 'Not Available'}}</a></h3>
+                        <h3><a href="{{ route('single.balloon', $balloon->id) }}">{{$balloon->title ?? 'Not Available'}}</a></h3>
                         <p style="font-size: 20px;">
                           @if ($balloon->offer_percent > 0)
                             <span>
@@ -771,7 +776,7 @@
                             ${{ number_format($balloon->price, 2) }}
                           @endif
                         </p>
-                        <a href="#" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
+                        <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($balloon->title) }}%0APrice%3A%20%24{{ ($balloon->offer_percent > 0) ? (number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2)) : (number_format($balloon->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('single.balloon', $balloon->id)) }}" target="_blank" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
                           style="position: relative; overflow: hidden; background: linear-gradient(135deg, #3498db, #e74c3c); border: none; transition: transform 0.2s, filter 0.2s; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
                             <span style="display: inline-flex; align-items: center; color: white;">
                                 <i class="bi bi-whatsapp me-2" style="font-size: 1.5rem;"></i> <!-- WhatsApp Icon -->
@@ -808,7 +813,7 @@
                         <div class="hotel-img">
                           <img src="{{ (!empty($balloon->image1)) ? url('upload/balloon_images/'.$balloon->image1) : url('upload/No_Image_Available.jpg') }}" style="width: 300px; max-height: 300px; min-height: 300px; object-fit: cover;" alt="Hotel 1" class="img-fluid">
                         </div>
-                        <h3><a href="#">{{$balloon->title ?? 'Not Available'}}</a></h3>
+                        <h3><a href="{{ route('single.balloon', $balloon->id) }}">{{$balloon->title ?? 'Not Available'}}</a></h3>
                         <p style="font-size: 20px;">
                           @if ($balloon->offer_percent > 0)
                             <span>
@@ -820,7 +825,7 @@
                             ${{ number_format($balloon->price, 2) }}
                           @endif
                         </p>
-                        <a href="#" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
+                        <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($balloon->title) }}%0APrice%3A%20%24{{ ($balloon->offer_percent > 0) ? (number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2)) : (number_format($balloon->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('single.balloon', $balloon->id)) }}" target="_blank" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
                           style="position: relative; overflow: hidden; background: linear-gradient(135deg, #3498db, #e74c3c); border: none; transition: transform 0.2s, filter 0.2s; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
                             <span style="display: inline-flex; align-items: center; color: white;">
                                 <i class="bi bi-whatsapp me-2" style="font-size: 1.5rem;"></i> <!-- WhatsApp Icon -->
@@ -857,7 +862,7 @@
                         <div class="hotel-img">
                           <img src="{{ (!empty($balloon->image1)) ? url('upload/balloon_images/'.$balloon->image1) : url('upload/No_Image_Available.jpg') }}" style="width: 300px; max-height: 300px; min-height: 300px; object-fit: cover;" alt="Hotel 1" class="img-fluid">
                         </div>
-                        <h3><a href="#">{{$balloon->title ?? 'Not Available'}}</a></h3>
+                        <h3><a href="{{ route('single.balloon',$balloon->id) }}">{{$balloon->title ?? 'Not Available'}}</a></h3>
                         <p style="font-size: 20px;">
                           @if ($balloon->offer_percent > 0)
                             <span>
@@ -869,7 +874,7 @@
                             ${{ number_format($balloon->price, 2) }}
                           @endif
                         </p>
-                        <a href="#" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
+                        <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($balloon->title) }}%0APrice%3A%20%24{{ ($balloon->offer_percent > 0) ? (number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2)) : (number_format($balloon->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('single.balloon', $balloon->id)) }}" target="_blank" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
                           style="position: relative; overflow: hidden; background: linear-gradient(135deg, #3498db, #e74c3c); border: none; transition: transform 0.2s, filter 0.2s; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
                             <span style="display: inline-flex; align-items: center; color: white;">
                                 <i class="bi bi-whatsapp me-2" style="font-size: 1.5rem;"></i> <!-- WhatsApp Icon -->
@@ -972,7 +977,7 @@
                                 </div>
                                 <div class="col-md-6">
                                   <h6>Ready Time <span style="color: deepPink;">– {{$occassion_love_theme->ready_time  ?? 'Not available'}}</span></h6>
-                                  <h2 class="mb-3">{{$occassion_love_theme->title  ?? 'Not available'}}</h2>
+                                  <a href="{{ route('single.occasion', $occassion_love_theme->id) }}" ><h2 class="mb-3">{{$occassion_love_theme->title  ?? 'Not available'}}</h2></a>
                                   <p><i class="fa fa-check text-success me-3"></i>{{$occassion_love_theme->text1 ?? 'Not available'}}</p>
                                   <p><i class="fa fa-check text-success me-3"></i>{{$occassion_love_theme->text2 ?? 'Not available'}}</p>
                                   <p><i class="fa fa-check text-success me-3"></i>{{$occassion_love_theme->text3 ?? 'Not available'}}</p>
@@ -988,7 +993,7 @@
                                       <h3>${{ number_format($occassion_love_theme->price, 2) }} </h3>
                                     @endif
                                   
-                                    <a href="#" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
+                                    <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($occassion_love_theme->title) }}%0APrice%3A%20%24{{ ($occassion_love_theme->offer_percent > 0) ? (number_format($occassion_love_theme->price - ($occassion_love_theme->price * ($occassion_love_theme->offer_percent / 100)), 2)) : (number_format($occassion_love_theme->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('single.occasion', $occassion_love_theme->id)) }}" target="_blank" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
                                       style="position: relative; overflow: hidden; background: linear-gradient(135deg, #3498db, #e74c3c); border: none; transition: transform 0.2s, filter 0.2s; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); margin-top: 20px;">
                                         <span style="display: inline-flex; align-items: center; color: white;">
                                             <i class="bi bi-whatsapp me-2" style="font-size: 1.5rem;"></i> <!-- WhatsApp Icon -->
@@ -1009,7 +1014,7 @@
                                 </div>
                                 <div class="col-md-6">
                                   <h6>Ready Time <span style="color: deepPink;">– {{$occassion_birthday_theme->ready_time  ?? 'Not available'}}</span></h6>
-                                  <h2 class="mb-3">{{$occassion_birthday_theme->title  ?? 'Not available'}}</h2>
+                                  <a href="{{ route('single.occasion', $occassion_birthday_theme->id) }}" ><h2 class="mb-3">{{$occassion_birthday_theme->title  ?? 'Not available'}}</h2></a>
                                   <p><i class="fa fa-check text-success me-3"></i>{{$occassion_birthday_theme->text1 ?? 'Not available'}}</p>
                                   <p><i class="fa fa-check text-success me-3"></i>{{$occassion_birthday_theme->text2 ?? 'Not available'}}</p>
                                   <p><i class="fa fa-check text-success me-3"></i>{{$occassion_birthday_theme->text3 ?? 'Not available'}}</p>
@@ -1025,7 +1030,7 @@
                                       <h3>${{ number_format($occassion_birthday_theme->price, 2) }} </h3>
                                     @endif
                                   
-                                    <a href="#" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
+                                    <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($occassion_birthday_theme->title) }}%0APrice%3A%20%24{{ ($occassion_birthday_theme->offer_percent > 0) ? (number_format($occassion_birthday_theme->price - ($occassion_birthday_theme->price * ($occassion_birthday_theme->offer_percent / 100)), 2)) : (number_format($occassion_birthday_theme->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('single.occasion', $occassion_birthday_theme->id)) }}" target="_blank" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
                                       style="position: relative; overflow: hidden; background: linear-gradient(135deg, #3498db, #e74c3c); border: none; transition: transform 0.2s, filter 0.2s; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); margin-top: 20px;">
                                         <span style="display: inline-flex; align-items: center; color: white;">
                                             <i class="bi bi-whatsapp me-2" style="font-size: 1.5rem;"></i> <!-- WhatsApp Icon -->
@@ -1046,7 +1051,7 @@
                                 </div>
                                 <div class="col-md-6">
                                   <h6>Ready Time <span style="color: deepPink;">– {{$occassion_gender_theme->ready_time  ?? 'Not available'}}</span></h6>
-                                  <h2 class="mb-3">{{$occassion_gender_theme->title  ?? 'Not available'}}</h2>
+                                  <a href="{{ route('single.occasion', $occassion_gender_theme->id) }}" ><h2 class="mb-3">{{$occassion_gender_theme->title  ?? 'Not available'}}</h2></a>
                                   <p><i class="fa fa-check text-success me-3"></i>{{$occassion_gender_theme->text1 ?? 'Not available'}}</p>
                                   <p><i class="fa fa-check text-success me-3"></i>{{$occassion_gender_theme->text2 ?? 'Not available'}}</p>
                                   <p><i class="fa fa-check text-success me-3"></i>{{$occassion_gender_theme->text3 ?? 'Not available'}}</p>
@@ -1062,7 +1067,7 @@
                                       <h3>${{ number_format($occassion_gender_theme->price, 2) }} </h3>
                                     @endif
                                   
-                                    <a href="#" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
+                                    <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($occassion_gender_theme->title) }}%0APrice%3A%20%24{{ ($occassion_gender_theme->offer_percent > 0) ? (number_format($occassion_gender_theme->price - ($occassion_gender_theme->price * ($occassion_gender_theme->offer_percent / 100)), 2)) : (number_format($occassion_gender_theme->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('single.occasion', $occassion_gender_theme->id)) }}" target="_blank" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
                                       style="position: relative; overflow: hidden; background: linear-gradient(135deg, #3498db, #e74c3c); border: none; transition: transform 0.2s, filter 0.2s; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); margin-top: 20px;">
                                         <span style="display: inline-flex; align-items: center; color: white;">
                                             <i class="bi bi-whatsapp me-2" style="font-size: 1.5rem;"></i> <!-- WhatsApp Icon -->
@@ -1083,7 +1088,7 @@
                                 </div>
                                 <div class="col-md-6">
                                   <h6>Ready Time <span style="color: deepPink;">– {{$occassion_bubble_theme->ready_time  ?? 'Not available'}}</span></h6>
-                                  <h2 class="mb-3">{{$occassion_bubble_theme->title  ?? 'Not available'}}</h2>
+                                  <a href="{{ route('single.occasion', $occassion_bubble_theme->id) }}" ><h2 class="mb-3">{{$occassion_bubble_theme->title  ?? 'Not available'}}</h2></a>
                                   <p><i class="fa fa-check text-success me-3"></i>{{$occassion_bubble_theme->text1 ?? 'Not available'}}</p>
                                   <p><i class="fa fa-check text-success me-3"></i>{{$occassion_bubble_theme->text2 ?? 'Not available'}}</p>
                                   <p><i class="fa fa-check text-success me-3"></i>{{$occassion_bubble_theme->text3 ?? 'Not available'}}</p>
@@ -1099,7 +1104,7 @@
                                       <h3>${{ number_format($occassion_bubble_theme->price, 2) }} </h3>
                                     @endif
                                   
-                                    <a href="#" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
+                                    <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($occassion_bubble_theme->title) }}%0APrice%3A%20%24{{ ($occassion_bubble_theme->offer_percent > 0) ? (number_format($occassion_bubble_theme->price - ($occassion_bubble_theme->price * ($occassion_bubble_theme->offer_percent / 100)), 2)) : (number_format($occassion_bubble_theme->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('single.occasion', $occassion_bubble_theme->id)) }}" target="_blank" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
                                       style="position: relative; overflow: hidden; background: linear-gradient(135deg, #3498db, #e74c3c); border: none; transition: transform 0.2s, filter 0.2s; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); margin-top: 20px;">
                                         <span style="display: inline-flex; align-items: center; color: white;">
                                             <i class="bi bi-whatsapp me-2" style="font-size: 1.5rem;"></i> <!-- WhatsApp Icon -->
@@ -1131,34 +1136,24 @@
                 <div class="col-lg-6">
                     <div class="bg-primary h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
                         <h1 class="text-white mb-4">Book For A Service</h1>
-                        <form>
+                        <form method="post" action="{{ route('send.message') }}" role="form">
+                          @csrf
                             <div class="row g-3">
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control border-0" placeholder="Your Name" style="height: 55px;">
+                                    <input type="text" name="name" id="name" class="name form-control border-0" value="{{ old('name') }}" placeholder="Your Name" style="height: 55px;">
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <input type="email" class="form-control border-0" placeholder="Your Email" style="height: 55px;">
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <select class="form-select border-0" style="height: 55px;">
-                                        <option selected>Select A Service</option>
-                                        <option value="1">Service 1</option>
-                                        <option value="2">Service 2</option>
-                                        <option value="3">Service 3</option>
-                                    </select>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="date" id="date1" data-target-input="nearest">
-                                        <input type="text"
-                                            class="form-control border-0 datetimepicker-input"
-                                            placeholder="Service Date" data-target="#date1" data-toggle="datetimepicker" style="height: 55px;">
-                                    </div>
+                                    <input type="text" name="phone" id="phone" class="phone form-control border-0" value="{{ old('phone') }}" placeholder="Your Phone" style="height: 55px;">
                                 </div>
                                 <div class="col-12">
-                                    <textarea class="form-control border-0" placeholder="Special Request"></textarea>
+                                    <input type="email" name="email" id="email" class="eml form-control border-0" value="{{ old('email') }}" placeholder="Your Email" style="height: 55px;">
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-secondary w-100 py-3" type="submit">Book Now</button>
+                                    <textarea name="message" id="message" class="message form-control border-0" placeholder="Special Request / Message">{{ old('message') }}</textarea>
+                                </div>
+                                <ul id="saveform_errList"></ul>
+                                <div class="col-12">
+                                    <button class="send_message btn btn-secondary w-100 py-3" type="submit">Book Now</button>
                                 </div>
                             </div>
                         </form>
@@ -1214,6 +1209,64 @@
         </div>
     </div>
     <!-- Testimonial End -->
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <!-- Form Submit JS File -->
+    <script>
+    $(document).ready(function() {
+
+        $(document).on('click', '.send_message', function(e) {
+        e.preventDefault();
+        console.log("Hello");
+        var data = {
+            'name': $('.name').val(),
+            'email': $('.eml').val(),
+            'phone': $('.phone').val(),
+            'message': $('.message').val()
+        }
+        //console.log(data);
+
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/sendmessage",
+            data: data,
+            dataType: "json",
+            success: function(response) {
+            console.log(response);
+            if (response.status == 400) {
+                $('#saveform_errList').html("");
+                $('#saveform_errList').addClass('alert alert-danger');
+                $.each(response.errors, function(key, err_values) {
+                $('#saveform_errList').append('<li>' + err_values + '</li>');
+                })
+            } else if (response.status == 200) {
+                $(".name").val("");
+                $(".eml").val("");
+                $(".phone").val(""); //clear input field after message successfully send
+                $(".message").val("");
+
+
+                $('#saveform_errList').html("");
+                $('#saveform_errList').removeClass('alert alert-danger');
+                $('#saveform_errList').addClass('alert alert-success')
+                $('#saveform_errList').text(response.message);
+            }
+
+            }
+        });
+
+        });
+
+    });
+    </script>
 
 
 

@@ -46,8 +46,6 @@ class LandingPageController extends Controller
 
     public function bookMessage(Request $request){
 
-
-
         $validator = Validator::make(
             $request->all(),
             [
@@ -102,7 +100,62 @@ class LandingPageController extends Controller
 
     }
 
+    public function sendMessage(Request $request){
 
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'required',
+                'email' => 'required|email',
+                'phone' => 'required',
+                'message' => 'required'
+            ]
+
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->messages()
+            ]);
+        } else {
+
+            $object = new stdClass;
+            $object->name = $request->name;
+            $object->email = $request->email;
+            $object->phone = $request->phone;
+            $object->message = $request->message;
+
+            $appUsers = User::all();
+            foreach($appUsers as $au){
+                $notification = new Notification();
+                $notification->user_id = $au->id;
+                $notification->type = "message";
+                $notification->status = "unseen";
+                $notification->client_email = $object->email;
+                $notification->client_phone = $object->phone;
+                $notification->message = json_encode($object);
+                $notification->created_at = new Datetime();
+                $notification->save();
+            }
+    
+            //$mail = new SendMail($object);
+            //Mail::to('evansarwer1@gmail.com')->send($mail);
+            //Mail::to('sajibahmed294@gmail.com')->send($mail);
+
+            return response()->json([
+                'status' => 200,
+                'data' => $object,
+                'message' => "Your request has been sent. Thank you!"
+            ]);
+        }
+
+    }
+
+    public function balloons(){
+        $balloons = Balloon::all();
+        return view('main.balloons',compact('balloons'));
+    }
 
     public function singleBalloon($id){
         $balloon = Balloon::where('id', $id)->first();
@@ -110,17 +163,28 @@ class LandingPageController extends Controller
     }
 
 
+    public function occasions(){
+        $occasions = Occasion::all();
+        return view('main.occasions',compact('occasions'));
+    }
+
     public function singleOccasion($id){
         $occasion = Occasion::where('id', $id)->first();
         return view('main.single_occasion',compact('occasion'));
     }
 
 
-
-
-
-
     public function seasonalHolidays(){
-        return view('main.seasonal_holidays');
+        $seasonalHolidays = Holiday::all();
+        return view('main.seasonal_holidays', compact('seasonalHolidays'));
+    }
+
+
+    public function contact(){
+        return view('main.contact');
+    }   
+
+    public function error404(){
+        return view('main.404');
     }
 }
