@@ -55,7 +55,7 @@
 
   <!-- ======= Sidebar ======= -->
 
-  @include('admin.layout.sidebar')
+  
   
   <!-- End Sidebar-->
 
