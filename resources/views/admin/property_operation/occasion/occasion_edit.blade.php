@@ -5,12 +5,12 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Profile</h1>
+      <h1>Occasion</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Users</li>
-          <li class="breadcrumb-item active">Profile</li>
+          <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+          <li class="breadcrumb-item">Item</li>
+          <li class="breadcrumb-item active">Occasion</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -80,6 +80,18 @@
                   @enderror
                       </div>
                     </div>
+
+
+                    <div class="row mb-3">
+                      <label for="category" class="col-md-4 col-lg-3 col-form-label">Category</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="category" type="text" class="form-control @error('category') is-invalid @enderror" id="category" value="{{ (old('category')) ? old('category') : $occasion->category }}">
+                        @error('category')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
+                      </div>
+                    </div>
+
 
                     <div class="row mb-3">
                       <label for="text" class="col-md-4 col-lg-3 col-form-label">Feature Text</label>

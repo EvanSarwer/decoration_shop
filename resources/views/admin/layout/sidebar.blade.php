@@ -15,21 +15,21 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('user.balloons') }}">
-          <i class="bi bi-person"></i>
+          <i class="bi bi-balloon"></i>
           <span>Balloons</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('user.occasions') }}">
-          <i class="bi bi-question-circle"></i>
+          <i class="bi bi-star"></i>
           <span>Occasions</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('user.holidays') }}">
-          <i class="bi bi-envelope"></i>
+          <i class="bi bi-cloud-sun-fill"></i>
           <span>Seasonal & Holidays</span>
         </a>
       </li><!-- End Contact Page Nav -->

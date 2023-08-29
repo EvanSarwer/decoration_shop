@@ -209,6 +209,7 @@ class PropertyOperationController extends Controller
         // Validation
         $request->validate([
             'title' => 'required',
+            'category' => 'required',
             'text1' => 'required',
             'price' => ['required', 'numeric', 'min:0', 
                             function ($attribute, $value, $fail) {
@@ -236,6 +237,7 @@ class PropertyOperationController extends Controller
         $occasion = new Occasion();
         $occasion->title = $request->title;
         $occasion->description = $request->description;
+        $occasion->category = $request->category;
         $occasion->text1 = $request->text1;
         $occasion->text2 = $request->text2;
         $occasion->text3 = $request->text3;
@@ -280,6 +282,7 @@ class PropertyOperationController extends Controller
         $request->validate([
             'id' => 'required',
             'title' => 'required',
+            'category' => 'required',
             'text1' => 'required',
             'price' => ['required', 'numeric', 'min:0', 
                             function ($attribute, $value, $fail) {
@@ -304,6 +307,7 @@ class PropertyOperationController extends Controller
         $occasion = Occasion::findOrFail($request->id);
         $occasion->title = $request->title;
         $occasion->description = $request->description;
+        $occasion->category = $request->category;
         $occasion->text1 = $request->text1;
         $occasion->text2 = $request->text2;
         $occasion->text3 = $request->text3;

@@ -7,7 +7,7 @@
       <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
           <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>
@@ -49,7 +49,17 @@
                       <td>{{ $message->message->name ?? 'Not available' }}</td>
                       <td>{{ $message->message->email ?? 'Email not available' }} </br> {{ $message->message->phone ?? 'Phone not available' }}</td>
                       <td>{{ $message->message->message ?? 'Not available' }}</td>
-                      <td>{{ $message->message->product ?? 'Not available' }}</td>
+                      <td>
+                        @if($message->message->product_type)
+                          @if($message->message->product_type === 'balloon')
+                            <a href="{{ route('single.balloon', $message->message->product_id) }}" target="_blank">See Product</a>
+                          @elseif($message->message->product_type === 'occasion')
+                            <a href="{{ route('single.occasion', $message->message->product_id) }}" target="_blank">See Product</a> 
+                          @endif            
+                        @else
+                          Not Available
+                        @endif
+                      </td>
                       <td>{{ $message->created_at }} </br> {{ $message->deliver_time }}</td>
                     </tr>
                   @endforeach

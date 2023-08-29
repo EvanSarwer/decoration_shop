@@ -5,12 +5,12 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Profile</h1>
+      <h1>Occasions</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Users</li>
-          <li class="breadcrumb-item active">Profile</li>
+          <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+          <li class="breadcrumb-item">Items</li>
+          <li class="breadcrumb-item active">Occasions</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -50,6 +50,7 @@
 
                         <th scope="col">Preview</th>
                         <th scope="col">Title</th>
+                        <th scope="col">Category</th>
                         <th scope="col">Feature Text</th>
                         <th scope="col">Price</th>
                         <th scope="col">Operation</th>
@@ -72,6 +73,7 @@
                             <span class="badge bg-info">Featuring</span>
                           @endif
                         </a></td>
+                        <td>{{ $occasion->category }}</td>
                         <td>
                           -> {{ $occasion->text1 }} </br> -> {{ $occasion->text2 ?? 'Not available' }} </br> -> {{ $occasion->text3 ?? 'Not available' }}
                           

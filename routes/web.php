@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PropertyOperationController;
 
 /*
@@ -15,15 +16,27 @@ use App\Http\Controllers\PropertyOperationController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+
 /////// Main Landing Page Routes
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [LandingPageController::class, 'index'])->name('index');
 
+Route::post('/bookmessage', [LandingPageController::class, 'bookMessage'])->name('book.message');
+
+Route::get('/single-balloon/{id}', [LandingPageController::class, 'singleBalloon'])->name('single.balloon');
+
+Route::get('/single-occasion/{id}', [LandingPageController::class, 'singleOccasion'])->name('single.occasion');
+
+Route::get('/seasonal-holidays', [LandingPageController::class, 'seasonalHolidays'])->name('seasonal.holidays');
 
 
 
@@ -34,6 +47,7 @@ Route::get('/dashboard', function () {
 
 
 ////// End Main Landing Page Routes
+
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
 

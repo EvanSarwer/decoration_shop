@@ -5,12 +5,12 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Profile</h1>
+      <h1>Balloon</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Users</li>
-          <li class="breadcrumb-item active">Profile</li>
+          <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+          <li class="breadcrumb-item">Item</li>
+          <li class="breadcrumb-item active">Balloon</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -85,8 +85,8 @@
                       <div class="col-md-8 col-lg-9">
                         <input name="category" type="text" class="form-control @error('category') is-invalid @enderror" id="category" value="{{ old('category') }}">
                         @error('category')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                          <span class="text-danger">{{ $message }}</span>
+                        @enderror
                       </div>
                     </div>
 
