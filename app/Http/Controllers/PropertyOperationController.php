@@ -38,7 +38,7 @@ class PropertyOperationController extends Controller
                                     function ($attribute, $value, $fail) {
                                         $value = floatval($value);
                             
-                                        if ($value < 0 || $value >= 1e12) {
+                                        if ($value < 0 || $value >= 101) {
                                             $fail($attribute . ' is invalid');
                                         }
                                     } ],
@@ -122,7 +122,7 @@ class PropertyOperationController extends Controller
                                     function ($attribute, $value, $fail) {
                                         $value = floatval($value);
                             
-                                        if ($value < 0 || $value >= 1e12) {
+                                        if ($value < 0 || $value >= 101) {
                                             $fail($attribute . ' is invalid');
                                         }
                                     } ],
@@ -223,7 +223,7 @@ class PropertyOperationController extends Controller
                                     function ($attribute, $value, $fail) {
                                         $value = floatval($value);
                             
-                                        if ($value < 0 || $value >= 1e12) {
+                                        if ($value < 0 || $value >= 101) {
                                             $fail($attribute . ' is invalid');
                                         }
                                     } ],
@@ -296,7 +296,7 @@ class PropertyOperationController extends Controller
                                     function ($attribute, $value, $fail) {
                                         $value = floatval($value);
                             
-                                        if ($value < 0 || $value >= 1e12) {
+                                        if ($value < 0 || $value >= 101) {
                                             $fail($attribute . ' is invalid');
                                         }
                                     } ],
@@ -386,7 +386,7 @@ class PropertyOperationController extends Controller
                                     function ($attribute, $value, $fail) {
                                         $value = floatval($value);
                             
-                                        if ($value < 0 || $value >= 1e12) {
+                                        if ($value < 0 || $value >= 101) {
                                             $fail($attribute . ' is invalid');
                                         }
                                     } ],
@@ -455,7 +455,7 @@ class PropertyOperationController extends Controller
                                     function ($attribute, $value, $fail) {
                                         $value = floatval($value);
                             
-                                        if ($value < 0 || $value >= 1e12) {
+                                        if ($value < 0 || $value >= 101) {
                                             $fail($attribute . ' is invalid');
                                         }
                                     } ],

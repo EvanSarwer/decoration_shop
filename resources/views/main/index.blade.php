@@ -38,7 +38,7 @@
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="{{ asset('page_assets/img/carousel-bg-1.jpg') }}" alt="Image">
+                <img class="w-100" src="{{ asset('page_assets/img/carousel-bg-1.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
                     <div class="carousel-caption d-flex align-items-center">
                         <div class="container">
                             <div class="row align-items-center justify-content-center justify-content-lg-start">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="{{ asset('page_assets/img/carousel-bg-2.jpg') }}" alt="Image">
+                    <img class="w-100" src="{{ asset('page_assets/img/carousel-bg-2.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
                     <div class="carousel-caption d-flex align-items-center">
                         <div class="container">
                             <div class="row align-items-center justify-content-center justify-content-lg-start">
