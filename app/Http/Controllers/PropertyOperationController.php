@@ -42,7 +42,7 @@ class PropertyOperationController extends Controller
                                             $fail($attribute . ' is invalid');
                                         }
                                     } ],
-            'image1' => 'required',
+            'image1' => ['required','image'],
             'quantity' => ['integer', 'min:0'],
 
         ], [   //custom message
@@ -227,7 +227,7 @@ class PropertyOperationController extends Controller
                                             $fail($attribute . ' is invalid');
                                         }
                                     } ],
-            'image1' => 'required',
+            'image1' => ['required','image'],
 
         ], [   //custom message
             'image1.required' => 'The image field is required.',
@@ -390,7 +390,7 @@ class PropertyOperationController extends Controller
                                             $fail($attribute . ' is invalid');
                                         }
                                     } ],
-            'image1' => 'required',
+            'image1' => ['required','image'],
 
         ], [   //custom message
             'image1.required' => 'The image field is required.',

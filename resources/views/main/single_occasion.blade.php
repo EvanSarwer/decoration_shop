@@ -177,7 +177,7 @@
                                     <input type="email" name="email" id="email" class="eml form-control border-0" value="{{ old('email') }}" placeholder="Your Email" style="height: 55px;">
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" name="product_name" class="form-control border-0" disabled value="{{$balloon->title ?? ''}}" placeholder="Product" style="height: 55px;">
+                                    <input type="text" name="product_name" class="form-control border-0" disabled value="{{$occasion->title ?? ''}}" placeholder="Product" style="height: 55px;">
                                 </div>
                                 <div class="col-12 col-sm-6">
                                 <input type="text" name="phone" id="phone" class="phone form-control border-0" value="{{ old('phone') }}" placeholder="Your Phone" style="height: 55px;">
