@@ -33,10 +33,72 @@
     <link href="{{ asset('page_assets/css/style.css') }}" rel="stylesheet">
 
 
+
+
+    <style>
+        /* Style for the fixed buttons container */
+        .fixed-buttons-container {
+            position: fixed;
+            top: 50%;
+            right: 20px; /* Adjust the right offset as needed */
+            transform: translateY(-50%);
+            z-index: 999;
+        }
+
+        /* Style for the square buttons */
+        .phone-button {
+            background-color: blue; /* Blue color for the phone button */
+            border: 2px solid;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: white; /* White icon color for the phone button */
+            border-radius: 10px;
+        }
+
+        .whatsapp-button {
+            background-color: green; /* Green color for the WhatsApp button */
+            border: 2px solid;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white; /* White icon color for the WhatsApp button */
+            border-radius: 10px;
+        }
+
+        /* Style for the icons */
+        .square-button i {
+            font-size: 24px; /* Adjust the icon size */
+        }
+    </style>
+
+
+
+
+
 </head>
 
 
 <body>
+
+      <!-- Fixed Buttons -->
+    <div class="fixed-buttons-container">
+        <a title="Call Us" href="tel:{{$whatsapp_number}}" class="square-button phone-button">
+            <i class="fas fa-phone"></i> <!-- Font Awesome phone icon -->
+        </a>
+        <a title="Message Us" href="https://wa.me/{{$whatsapp_number}}" class="square-button whatsapp-button">
+            <i class="fab fa-whatsapp"></i> <!-- Font Awesome WhatsApp icon -->
+        </a>
+    </div>
 
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -63,7 +125,7 @@
             <div class="col-lg-5 px-5 text-end">
                 <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <small class="fa fa-phone-alt text-primary me-2"></small>
-                    <small>+012 345 6789</small>
+                    <small>{{$whatsapp_number}}</small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center">
                     <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -101,7 +163,7 @@
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Address</h4>
                     <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>{{$whatsapp_number}}</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
@@ -119,11 +181,10 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Services</h4>
-                    <a class="btn btn-link" href="">Diagnostic Test</a>
-                    <a class="btn btn-link" href="">Engine Servicing</a>
-                    <a class="btn btn-link" href="">Tires Replacement</a>
-                    <a class="btn btn-link" href="">Oil Changing</a>
-                    <a class="btn btn-link" href="">Vacuam Cleaning</a>
+                    <a class="btn btn-link" href="{{ route('balloons') }}">Balloons</a>
+                    <a class="btn btn-link" href="{{ route('occasions') }}">Occasions</a>
+                    <a class="btn btn-link" href="{{ route('seasonal.holidays') }}">Seasonal & Holidays</a>
+                    <a class="btn btn-link" href="{{ route('contact') }}">Contact Us</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Newsletter</h4>

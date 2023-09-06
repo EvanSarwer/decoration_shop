@@ -71,17 +71,22 @@
                     </div>
                     <small>Starting From: </small>
                     @if($occasion)
-                        @if ($occasion->offer_percent > 0)
-                            <h3>
-                            ${{ number_format($occasion->price - ($occasion->price * ($occasion->offer_percent / 100)), 2) }}
-                            <small class="text-decoration-line-through"> ${{ number_format($occasion->price, 2) }}</small>
-                            <span class="badge text-danger">{{ $occasion->offer_percent }}% Offer</span>
-                            </h3>
+                        @if ($occasion->price > 0)
+                            @if ($occasion->offer_percent > 0)
+                                <h3>
+                                ₹{{ number_format($occasion->price - ($occasion->price * ($occasion->offer_percent / 100)), 2) }}
+                                <small class="text-decoration-line-through"> ₹{{ number_format($occasion->price, 2) }}</small>
+                                <span class="badge text-danger">{{ $occasion->offer_percent }}% Offer</span>
+                                </h3>
+                            @else
+                                <h3>₹{{ number_format($occasion->price, 2) }} </h3>
+                            @endif
+
                         @else
-                            <h3>${{ number_format($occasion->price, 2) }} </h3>
+                            <span>Message us for best price</span>
                         @endif
                         
-                        <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($occasion->title) }}%0APrice%3A%20%24{{ ($occasion->offer_percent > 0) ? (number_format($occasion->price - ($occasion->price * ($occasion->offer_percent / 100)), 2)) : (number_format($occasion->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('single.occasion', $occasion->id)) }}" target="_blank" class="btn btn-success rounded-pill py-2 mt-4 px-4 d-flex align-items-center justify-content-center mb-3"
+                        <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($occasion->title) }}%0APrice%3A%20%E2%82%B9{{ ($occasion->price > 0) ? (($occasion->offer_percent > 0) ? (number_format($occasion->price - ($occasion->price * ($occasion->offer_percent / 100)), 2)) : (number_format($occasion->price, 2))) : '' }}%0AProduct%20url%3A%20{{ urlencode(route('single.occasion', $occasion->id)) }}" target="_blank" class="btn btn-success rounded-pill py-2 mt-4 px-4 d-flex align-items-center justify-content-center mb-3"
                             style="position: relative; overflow: hidden; background: linear-gradient(135deg, #3498db, #e74c3c); border: none; transition: transform 0.2s, filter 0.2s; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); margin-top: 20px;">
                             <span style="display: inline-flex; align-items: center; color: white;">
                                 <i class="bi bi-whatsapp me-2" style="font-size: 1.5rem;"></i> <!-- WhatsApp Icon -->

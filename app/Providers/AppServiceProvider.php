@@ -20,6 +20,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::share('whatsapp_number', '919812143197');
+        View::share('whatsapp_number', '+919368484824');
     }
 }

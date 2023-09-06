@@ -71,7 +71,7 @@
                                 <img class="img-fluid" src="{{ (!empty($holiday->image1)) ? url('upload/holiday_images/'.$holiday->image1) : url('upload/No_Image_Available.jpg') }}" style="width: 350px; max-height: 350px; min-height: 350px; object-fit: cover;"  alt="seasonal&holiday">
                                 <div class="team-overlay position-absolute start-0 top-0 w-100 h-100">
                                     
-                                <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($holiday->title) }}%0APrice%3A%20%24{{ ($holiday->offer_percent > 0) ? (number_format($holiday->price - ($holiday->price * ($holiday->offer_percent / 100)), 2)) : (number_format($holiday->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('seasonal.holidays')) }}" target="_blank" class="btn btn-outline-success"><i class="bi bi-whatsapp"></i></a>
+                                <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($holiday->title) }}%0APrice%3A%20%E2%82%B9{{ ($holiday->price > 0) ? (($holiday->offer_percent > 0) ? (number_format($holiday->price - ($holiday->price * ($holiday->offer_percent / 100)), 2)) : (number_format($holiday->price, 2))) : '' }}%0AProduct%20url%3A%20{{ urlencode(route('seasonal.holidays')) }}" target="_blank" class="btn btn-outline-success"><i class="bi bi-whatsapp"></i></a>
                                     
                                 </div>
                             </div>
@@ -94,15 +94,20 @@
                                 </div>
                                 
                                 <p style="font-size: 20px;">
-                                @if ($holiday->offer_percent > 0)
-                                    <span>
-                                    ${{ number_format($holiday->price - ($holiday->price * ($holiday->offer_percent / 100)), 2) }}
-                                    <small class="text-decoration-line-through"> ${{ number_format($holiday->price, 2) }}</small>
-                                    </span> </br>
-                                    <span class="badge text-danger">{{ number_format($holiday->offer_percent, 2) }}% Offer</span>
+                                @if ($holiday->price > 0)
+                                    @if ($holiday->offer_percent > 0)
+                                        <span>
+                                        ₹{{ number_format($holiday->price - ($holiday->price * ($holiday->offer_percent / 100)), 2) }}
+                                        <small class="text-decoration-line-through"> ₹{{ number_format($holiday->price, 2) }}</small>
+                                        </span> </br>
+                                        <span class="badge text-danger">{{ number_format($holiday->offer_percent, 2) }}% Offer</span>
+                                    @else
+                                        ₹{{ number_format($holiday->price, 2) }}
+                                    @endif
                                 @else
-                                    ${{ number_format($holiday->price, 2) }}
+                                    <small>Message us for best price</small>
                                 @endif
+
                                 </p>
                             </div>
                         </div>

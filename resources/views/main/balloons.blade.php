@@ -66,17 +66,22 @@
                             </div>
                             <h3><a href="{{ route('single.balloon', $balloon->id) }}">{{$balloon->title ?? 'Not Available'}}</a></h3>
                             <p style="font-size: 20px;">
-                            @if ($balloon->offer_percent > 0)
-                                <span>
-                                ${{ number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2) }}
-                                <small class="text-decoration-line-through"> ${{ number_format($balloon->price, 2) }}</small>
-                                </span> </br>
-                                <span class="badge text-danger">{{ $balloon->offer_percent }}% Offer</span>
-                            @else
-                                ${{ number_format($balloon->price, 2) }}
-                            @endif
+                                @if ($balloon->price > 0)
+                                    @if ($balloon->offer_percent > 0)
+                                        <span>
+                                            ₹{{ number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2) }}
+                                        <small class="text-decoration-line-through"> ₹{{ number_format($balloon->price, 2) }}</small>
+                                        </span> </br>
+                                        <span class="badge text-danger">{{ $balloon->offer_percent }}% Offer</span>
+                                    @else
+                                        ₹{{ number_format($balloon->price, 2) }}
+                                    @endif
+
+                                @else
+                                    <small>Message us for best price</small>
+                                @endif
                             </p>
-                            <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($balloon->title) }}%0APrice%3A%20%24{{ ($balloon->offer_percent > 0) ? (number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2)) : (number_format($balloon->price, 2)) }}%0AProduct%20url%3A%20{{ urlencode(route('single.balloon', $balloon->id)) }}" target="_blank" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
+                            <a href="https://api.whatsapp.com/send?phone={{ $whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($balloon->title) }}%0APrice%3A%20%E2%82%B9{{ ($balloon->price > 0) ? (($balloon->offer_percent > 0) ? (number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2)) : (number_format($balloon->price, 2))) : '' }}%0AProduct%20url%3A%20{{ urlencode(route('single.balloon', $balloon->id)) }}" target="_blank" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
                             style="position: relative; overflow: hidden; background: linear-gradient(135deg, #3498db, #e74c3c); border: none; transition: transform 0.2s, filter 0.2s; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
                                 <span style="display: inline-flex; align-items: center; color: white;">
                                     <i class="bi bi-whatsapp me-2" style="font-size: 1.5rem;"></i> <!-- WhatsApp Icon -->
