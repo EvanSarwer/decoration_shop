@@ -127,12 +127,12 @@
                         <td>
                           @if ($balloon->offer_percent > 0)
                             <span>
-                              ${{ number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2) }}
-                              <small class="text-decoration-line-through"> ${{ number_format($balloon->price, 2) }}</small>
+                              ₹{{ number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2) }}
+                              <small class="text-decoration-line-through"> ₹{{ number_format($balloon->price, 2) }}</small>
                             </span> </br>
                             <span class="badge text-danger">{{ $balloon->offer_percent }}% Offer</span>
                           @else
-                            ${{ number_format($balloon->price, 2) }}
+                            ₹{{ number_format($balloon->price, 2) }}
                           @endif
                         </td>
                         <td>

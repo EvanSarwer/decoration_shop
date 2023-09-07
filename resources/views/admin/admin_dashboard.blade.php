@@ -9,7 +9,7 @@
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.3/dist/cdn.min.js"></script>
 
 
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <title>Dashboard - Kanak Decoration</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
