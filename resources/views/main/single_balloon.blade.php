@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    @if ($balloon && $balloon->offer_percent > 0)
+                    @if ($balloon && $balloon->price > 0 && $balloon->offer_percent > 0)
                         <h6 class="text-primary text-uppercase">{{$balloon->offer_percent}}% OFF</h6>
                     @endif
                     <h1 class="mb-4">{{$balloon->title ?? 'Not available'}}</h1>
@@ -76,14 +76,14 @@
                         </div>
                         <div class="col-12 wow fadeIn" data-wow-delay="0.5s">
                             <div class="d-flex">
-                                <div class="bg-light d-flex flex-shrink-0 align-items-center justify-content-center mt-1" style="width: 45px; height: 45px;">
+                                <!-- <div class="bg-light d-flex flex-shrink-0 align-items-center justify-content-center mt-1" style="width: 45px; height: 45px;">
                                     <span class="fw-bold text-info"><i class="bi bi-check2-circle"></i></span>
-                                </div>
+                                </div> -->
                                 <div class="ps-3 pt-3">
                                     @if($balloon && $balloon->quantity > 0)
                                         <h6>In Stock, {{ $balloon->quantity}} Units</h6>
                                     @else
-                                        <h6 style="color: red;">Out of stock</h6>
+                                        <!-- <h6 style="color: red;">Out of stock</h6> -->
                                     @endif
                                     
                                 </div>

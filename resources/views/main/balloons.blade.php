@@ -60,7 +60,7 @@
                 @foreach($balloons as $key => $balloon)
 
                     <div class="col-lg-4 col-md-6 ">
-                        <div class="hotel" style="width: 300px; max-height: 550px; min-height: 550px; object-fit: cover;">
+                        <div class="hotel" style="width: 300px; max-height: 500px; min-height: 500px; object-fit: cover;">
                             <div class="hotel-img">
                             <img src="{{ (!empty($balloon->image1)) ? url('upload/balloon_images/'.$balloon->image1) : url('upload/No_Image_Available.jpg') }}" style="width: 300px; max-height: 300px; min-height: 300px; object-fit: cover;" alt="balloon" class="img-fluid">
                             </div>

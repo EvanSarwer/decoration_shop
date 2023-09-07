@@ -125,7 +125,8 @@
                               @if($balloon->quantity > 0)
                                 <p class="mb-0">In Stock, {{$balloon->quantity}} Units</p>
                               @else
-                                <p class="mb-0">Out of Stock</p>
+                                <!-- <p class="mb-0">Out of Stock</p> -->
+                                <p></p>
                               @endif
                             </div>
 
