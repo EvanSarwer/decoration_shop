@@ -21,7 +21,7 @@
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu fade-up m-0">
                         <!-- <a href="booking.html" class="dropdown-item">Booking</a> -->
-                        <a href="{{ route('admin.login') }}" class="dropdown-item">Login</a>
+                        <a href="{{ route('admin.login') }}" target="_blank" class="dropdown-item">Login</a>
                         <a href="{{ route('404') }}" class="dropdown-item">404 Page</a>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                <img class="w-100" src="{{ asset('page_assets/img/carousel-bg-1.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
+                <img class="w-100" src="{{ asset('page_assets/img/carousel-bg-2.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
                     <div class="carousel-caption d-flex align-items-center">
                         <div class="container">
                             <div class="row align-items-center justify-content-center justify-content-lg-start">
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="{{ asset('page_assets/img/carousel-bg-2.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
+                    <img class="w-100" src="{{ asset('page_assets/img/carousel-bg-1.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
                     <div class="carousel-caption d-flex align-items-center">
                         <div class="container">
                             <div class="row align-items-center justify-content-center justify-content-lg-start">

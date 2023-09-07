@@ -23,7 +23,7 @@
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu fade-up m-0">
                         <!-- <a href="booking.html" class="dropdown-item">Booking</a> -->
-                        <a href="{{ route('admin.login') }}" class="dropdown-item">Login</a>
+                        <a href="{{ route('admin.login') }}" target="_blank" class="dropdown-item">Login</a>
                         <a href="{{ route('404') }}" class="dropdown-item">404 Page</a>
                     </div>
                 </div>
