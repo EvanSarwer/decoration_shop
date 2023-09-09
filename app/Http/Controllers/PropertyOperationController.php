@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Balloon;
 use App\Models\Holiday;
 use App\Models\Occasion;
+use App\Models\PageProperty;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class PropertyOperationController extends Controller
 {
@@ -42,7 +44,7 @@ class PropertyOperationController extends Controller
                                             $fail($attribute . ' is invalid');
                                         }
                                     } ],
-            'image1' => ['required','image'],
+            'image1' => ['required','image','max:2048'],
             'quantity' => ['integer', 'min:0'],
 
         ], [   //custom message
@@ -127,6 +129,8 @@ class PropertyOperationController extends Controller
                                         }
                                     } ],
             'quantity' => ['integer', 'min:0'],
+            'image1' => ['nullable', 'image', 'max:2048'],
+            'brand' => ['nullable', 'image', 'max:2048'],
 
         ]);
 
@@ -227,7 +231,7 @@ class PropertyOperationController extends Controller
                                             $fail($attribute . ' is invalid');
                                         }
                                     } ],
-            'image1' => ['required','image'],
+            'image1' => ['required','image', 'max:2048'],
 
         ], [   //custom message
             'image1.required' => 'The image field is required.',
@@ -300,6 +304,7 @@ class PropertyOperationController extends Controller
                                             $fail($attribute . ' is invalid');
                                         }
                                     } ],
+            'image1' => ['nullable', 'image', 'max:2048'],
 
         ]);
 
@@ -390,7 +395,7 @@ class PropertyOperationController extends Controller
                                             $fail($attribute . ' is invalid');
                                         }
                                     } ],
-            'image1' => ['required','image'],
+            'image1' => ['required','image', 'max:2048'],
 
         ], [   //custom message
             'image1.required' => 'The image field is required.',
@@ -459,6 +464,7 @@ class PropertyOperationController extends Controller
                                             $fail($attribute . ' is invalid');
                                         }
                                     } ],
+            'image1' => ['nullable', 'image', 'max:2048'],
 
         ]);
 
@@ -510,6 +516,241 @@ class PropertyOperationController extends Controller
     
 
     // End Holiday
+
+
+
+    // Start Edit Page Property
+
+    public function PagePropertyEditView(){
+        $page_property = PageProperty::first();
+        if($page_property){
+            if($page_property->client_feedbacks != null){
+                $page_property->client_feedbacks = json_decode($page_property->client_feedbacks);
+            }
+        }
+            
+        return view('admin.property_operation.edit_page_property',compact('page_property'));
+    }
+
+
+
+    public function PagePropertyEditPost(Request $request){
+
+        // Validation
+        $request->validate([
+
+            'slider_image1' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3072'],
+            'slider_image2' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3072'],
+            'about_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3072'],
+            'whatsapp_number' => 'required',
+            'phone_number' => 'required',
+            'email' => 'required|email',
+            'opening_hours1' => 'required',
+            'address' => 'required',
+            'address_link' => 'required',
+            'years_experience' => ['integer', 'min:0'],
+            'expert_technicians' => ['integer', 'min:0'],
+            'satisfied_clients' => ['integer', 'min:0'],
+            'compleate_projects' => ['integer', 'min:0'],
+
+            'facebook_link' => ['nullable', 'url'],
+            'instagram_link' => ['nullable', 'url'],
+            'twitter_link' => ['nullable', 'url'],
+            'youtube_link' => ['nullable', 'url'],
+
+        ]);
+
+
+
+        $page_property = PageProperty::first();
+        $page_property->whatsapp_number = $request->whatsapp_number;
+        $page_property->phone_number = $request->phone_number;
+        $page_property->email = $request->email;
+        $page_property->opening_hours1 = $request->opening_hours1;
+        $page_property->address = $request->address;
+        $page_property->address_link = $request->address_link;
+        $page_property->facebook_link = $request->facebook_link;
+        $page_property->instagram_link = $request->instagram_link;
+        $page_property->twitter_link = $request->twitter_link;
+        $page_property->youtube_link = $request->youtube_link;
+        $page_property->years_experience = $request->years_experience;
+        $page_property->expert_technicians = $request->expert_technicians;
+        $page_property->satisfied_clients = $request->satisfied_clients;
+        $page_property->compleate_projects = $request->compleate_projects;
+
+
+        if($request->hasfile('slider_image1')){
+            $destination = 'page_assets/img/'.$page_property->slider_image1;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('slider_image1');
+            // $filename = date('YmdHi').$file->getClientOriginalName();
+            $filename = 'carousel-bg-1.jpg';
+            //$file->move(public_path('page_assets/img'),$filename);
+            $img = Image::make(file_get_contents($file));
+            $img->save(\public_path('page_assets/img/'.$filename),60);
+            $balloon['slider_image1'] = $filename;
+        }
+
+        if($request->hasfile('slider_image2')){
+            $destination = 'page_assets/img/'.$page_property->slider_image2;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('slider_image2');
+            // $filename = date('YmdHi').$file->getClientOriginalName();
+            $filename = 'carousel-bg-2.jpg';
+            //$file->move(public_path('page_assets/img'),$filename);
+            $img = Image::make(file_get_contents($file));
+            $img->save(\public_path('page_assets/img/'.$filename),60);
+            $balloon['slider_image2'] = $filename;
+        }
+
+        if($request->hasfile('about_image')){
+            $destination = 'page_assets/img/'.$page_property->about_image;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('about_image');
+            // $filename = date('YmdHi').$file->getClientOriginalName();
+            $filename = 'about.jpg';
+            //$file->move(public_path('page_assets/img'),$filename);
+            $img = Image::make(file_get_contents($file));
+            $img->save(\public_path('page_assets/img/'.$filename),60);
+            $balloon['about_image'] = $filename;
+        }
+
+
+
+        // if($request->hasfile('brand')){
+        //     $destination = 'upload/balloon_images/'.$balloon->brand;
+        //     if(File::exists($destination)){
+        //         File::delete($destination);
+        //     }
+        //     $file = $request->file('brand');
+        //     $filename = date('YmdHi').$file->getClientOriginalName();
+        //     $file->move(public_path('upload/balloon_images'),$filename);
+        //     $balloon['brand'] = $filename;
+        // }
+
+        $page_property->save();
+
+        $notification = array(
+            'message' => 'Page Property Updated Successfully',
+            'alert-type' => 'success',
+        );
+
+        return back()->with($notification);
+
+
+    }
+
+
+    public function AddCustomerFeedbackPost(Request $request){
+        // Validation
+        $request->validate([
+            'client_name' => 'required',
+            'client_email' => 'nullable|email',
+            'client_feedback' => 'required',
+        ]);
+
+        $page_property = PageProperty::first();
+        if($page_property){
+            if($page_property->client_feedbacks != null){
+                $client_feedbacks = json_decode($page_property->client_feedbacks);
+                if(count($client_feedbacks) >= 10){
+                    $notification = array(
+                        'message' => 'You Can Not Add More Than 10 Feedbacks',
+                        'alert-type' => 'error',
+                    );
+                    return back()->with($notification);
+                }else{
+                    $uniqueClientId = time() . rand(1000, 9999);
+                    $client_feedbacks[] = [
+                        'id' => $uniqueClientId, 
+                        'client_name' => $request->client_name,
+                        'client_email' => $request->client_email,
+                        'client_feedback' => $request->client_feedback,
+                    ];
+                    $page_property->client_feedbacks = json_encode($client_feedbacks);
+                    $page_property->save();
+                }
+                
+            }else{
+                $uniqueClientId = time() . rand(1000, 9999);
+                $client_feedbacks[] = [
+                    'id' => $uniqueClientId,
+                    'client_name' => $request->client_name,
+                    'client_email' => $request->client_email,
+                    'client_feedback' => $request->client_feedback,
+                ];
+                $page_property->client_feedbacks = json_encode($client_feedbacks);
+                $page_property->save();
+            }
+            $notification = array(
+                'message' => 'Customer Feedback Added Successfully',
+                'alert-type' => 'success',
+            );
+            return back()->with($notification);
+        }
+
+        $notification = array(
+            'message' => 'Something Went Wrong',
+            'alert-type' => 'error',
+        );
+        return back()->with($notification);
+
+    }
+
+
+    public function CustomerFeedbackDelete($id){
+        $page_property = PageProperty::first();
+        if($page_property){
+            if($page_property->client_feedbacks != null){
+                $client_feedbacks = json_decode($page_property->client_feedbacks);
+                foreach($client_feedbacks as $key => $client_feedback){
+                    if($client_feedback->id == $id){
+                        unset($client_feedbacks[$key]);
+                        if(count($client_feedbacks) == 0){
+                            $page_property->client_feedbacks = null;
+                            $page_property->save();
+                            $notification = array(
+                                'message' => 'Customer Feedback Deleted Successfully',
+                                'alert-type' => 'success',
+                            );
+                            return back()->with($notification);
+                        }
+                        $page_property->client_feedbacks = json_encode($client_feedbacks);
+                        $page_property->save();
+                        $notification = array(
+                            'message' => 'Customer Feedback Deleted Successfully',
+                            'alert-type' => 'success',
+                        );
+                        return back()->with($notification);
+                    }
+                }
+            }
+        }
+
+        $notification = array(
+            'message' => 'Something Went Wrong',
+            'alert-type' => 'error',
+        );
+        return back()->with($notification);
+
+    }
+
+
+
+
+
+
+
+
+
+
+    // End Edit Page Property
 
 
 

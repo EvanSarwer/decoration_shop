@@ -143,6 +143,16 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
     // End Holiday Operations
 
 
+    // Start Edit Page Property Operations
+    Route::get('/user/pageProperty/edit', [PropertyOperationController::class, 'PagePropertyEditView'])->name('user.pageProperty.edit');
+
+    Route::post('/user/pageProperty/edit', [PropertyOperationController::class, 'PagePropertyEditPost'])->name('user.pageProperty.edit.post');
+
+    Route::post('/user/customerFeedback/add', [PropertyOperationController::class, 'AddCustomerFeedbackPost'])->name('user.add.customerFeedback.post');
+
+    Route::get('/user/customerFeedback/delete/{id}', [PropertyOperationController::class, 'CustomerFeedbackDelete'])->name('user.customerFeedback.delete');
+    // End Edit Page Property Operations
+
 }); // End Admin Group Middleware
 
 

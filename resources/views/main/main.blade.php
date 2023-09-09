@@ -92,10 +92,10 @@
 
       <!-- Fixed Buttons -->
     <div class="fixed-buttons-container">
-        <a title="Call Us" href="tel:{{$whatsapp_number}}" class="square-button phone-button">
+        <a title="Call Us" href="tel:{{$page_property_view->phone_number}}" target="_blank" class="square-button phone-button">
             <i class="fas fa-phone"></i> <!-- Font Awesome phone icon -->
         </a>
-        <a title="Message Us" href="https://wa.me/{{$whatsapp_number}}" class="square-button whatsapp-button">
+        <a title="Message Us" href="https://wa.me/{{$page_property_view->whatsapp_number}}" target="_blank" class="square-button whatsapp-button">
             <i class="fab fa-whatsapp"></i> <!-- Font Awesome WhatsApp icon -->
         </a>
     </div>
@@ -115,23 +115,23 @@
             <div class="col-lg-7 px-5 text-start">
                 <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <small class="fa fa-map-marker-alt text-primary me-2"></small>
-                    <small>123 Street, New York, USA</small>
+                    <small>{{$page_property_view->address}}</small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center py-3">
                     <small class="far fa-clock text-primary me-2"></small>
-                    <small>Mon - Fri : 09.00 AM - 09.00 PM</small>
+                    <small>24/7 Customer Support & Services</small>
                 </div>
             </div>
             <div class="col-lg-5 px-5 text-end">
                 <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <small class="fa fa-phone-alt text-primary me-2"></small>
-                    <small>{{$whatsapp_number}}</small>
+                    <small>{{$page_property_view->phone_number}}</small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center">
-                    <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-sm-square bg-white text-primary me-0" href=""><i class="fab fa-instagram"></i></a>
+                    @if($page_property_view->facebook_link) <a class="btn btn-sm-square bg-white text-primary me-1" href="{{$page_property_view->facebook_link}}" target="_blank"><i class="fab fa-facebook-f"></i></a> @endif
+                    @if($page_property_view->twitter_link) <a class="btn btn-sm-square bg-white text-primary me-1" href="{{$page_property_view->twitter_link}}" target="_blank"><i class="fab fa-twitter"></i></a> @endif
+                    @if($page_property_view->whatsapp_number) <a class="btn btn-sm-square bg-white text-primary me-1" href="https://wa.me/{{$page_property_view->whatsapp_number}}" target="_blank" ><i class="fab fa-whatsapp"></i></a> @endif
+                    @if($page_property_view->instagram_link) <a class="btn btn-sm-square bg-white text-primary me-0" href="{{$page_property_view->instagram_link}}" target="_blank"><i class="fab fa-instagram"></i></a> @endif
                 </div>
             </div>
         </div>
@@ -162,22 +162,23 @@
             <div class="row g-5">
                 <div class="col-lg-4 col-md-6">
                     <h4 class="text-light mb-4">Address</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>{{$whatsapp_number}}</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>{{$page_property_view->address}}</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>{{$page_property_view->whatsapp_number}}</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>{{$page_property_view->email}}</p>
                     <div class="d-flex pt-2">
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        @if($page_property_view->twitter_link) <a class="btn btn-outline-light btn-social" href="{{$page_property_view->twitter_link}}" target="_blank" ><i class="fab fa-twitter"></i></a> @endif
+                        @if($page_property_view->facebook_link) <a class="btn btn-outline-light btn-social" href="{{$page_property_view->facebook_link}}" target="_blank" ><i class="fab fa-facebook-f"></i></a> @endif
+                        @if($page_property_view->instagram_link) <a class="btn btn-outline-light btn-social" href="{{$page_property_view->instagram_link}}" target="_blank" ><i class="fab fa-instagram"></i></a> @endif
+                        @if($page_property_view->whatsapp_number) <a class="btn btn-outline-light btn-social" href="https://wa.me/{{$page_property_view->whatsapp_number}}" target="_blank" ><i class="fab fa-whatsapp"></i></a> @endif
+                        @if($page_property_view->youtube_link) <a class="btn btn-outline-light btn-social" href="{{$page_property_view->youtube_link}}" target="_blank" ><i class="fab fa-youtube"></i></a> @endif
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <h4 class="text-light mb-4">Opening Hours</h4>
-                    <h6 class="text-light">Monday - Friday:</h6>
-                    <p class="mb-4">09.00 AM - 09.00 PM</p>
-                    <h6 class="text-light">Saturday - Sunday:</h6>
-                    <p class="mb-0">09.00 AM - 12.00 PM</p>
+                    {{-- <h6 class="text-light">Monday - Friday:</h6> --}}
+                    <p class="mb-4">{{ $page_property_view->opening_hours1 }}</p>
+                    {{-- <h6 class="text-light">Saturday - Sunday:</h6>
+                    <p class="mb-0">09.00 AM - 12.00 PM</p> --}}
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <h4 class="text-light mb-4">Services</h4>

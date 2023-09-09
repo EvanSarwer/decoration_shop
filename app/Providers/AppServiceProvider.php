@@ -20,6 +20,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::share('whatsapp_number', '+919368484824');
+        $page_property_view = \App\Models\PageProperty::first();
+        if($page_property_view){
+            if($page_property_view->client_feedbacks != null){
+                $page_property_view->client_feedbacks = json_decode($page_property_view->client_feedbacks);
+            }
+            
+            View::share('page_property_view', $page_property_view);
+        }
+        
     }
 }

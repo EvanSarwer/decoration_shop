@@ -39,6 +39,13 @@
     </a>
   </li><!-- End Contact Page Nav -->
 
+
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="{{ route('user.pageProperty.edit') }}">
+      <i class="bi bi-wrench-adjustable-circle"></i>
+      <span>Page-Property Update</span>
+    </a>
+  </li><!-- End Contact Page Nav -->
   
 
 </ul>
