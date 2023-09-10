@@ -704,32 +704,73 @@ class PropertyOperationController extends Controller
     }
 
 
-    public function CustomerFeedbackDelete($id){
+    // public function CustomerFeedbackDelete($id){
+    //     $page_property = PageProperty::first();
+    //     if($page_property){
+    //         if($page_property->client_feedbacks != null){
+    //             $client_feedbacks = json_decode($page_property->client_feedbacks);
+
+    //             $client_feedbacks = array_filter($client_feedbacks, function ($client) use ($id) {
+    //                 return $client->id !== $id;
+    //             });
+
+
+
+    //             if(count($client_feedbacks) == 0){
+    //                 $page_property->client_feedbacks = null;
+    //                 $page_property->save();
+    //                 $notification = array(
+    //                     'message' => 'Customer Feedback Deleted Successfully',
+    //                     'alert-type' => 'success',
+    //                 );
+    //                 return back()->with($notification);
+    //             }else{
+    //                 $page_property->client_feedbacks = json_encode($client_feedbacks);
+    //                 $page_property->save();
+    //                 $notification = array(
+    //                     'message' => 'Customer Feedback Deleted Successfully',
+    //                     'alert-type' => 'success',
+    //                 );
+    //                 return back()->with($notification);
+    //             }
+                
+    //         }
+    //     }
+
+    //     $notification = array(
+    //         'message' => 'Something Went Wrong',
+    //         'alert-type' => 'error',
+    //     );
+    //     return back()->with($notification);
+
+    // }
+
+
+    public function CustomerFeedbackDelete($id)
+    {
         $page_property = PageProperty::first();
-        if($page_property){
-            if($page_property->client_feedbacks != null){
+        if ($page_property) {
+            if ($page_property->client_feedbacks !== null) {
                 $client_feedbacks = json_decode($page_property->client_feedbacks);
-                foreach($client_feedbacks as $key => $client_feedback){
-                    if($client_feedback->id == $id){
-                        unset($client_feedbacks[$key]);
-                        if(count($client_feedbacks) == 0){
-                            $page_property->client_feedbacks = null;
-                            $page_property->save();
-                            $notification = array(
-                                'message' => 'Customer Feedback Deleted Successfully',
-                                'alert-type' => 'success',
-                            );
-                            return back()->with($notification);
-                        }
-                        $page_property->client_feedbacks = json_encode($client_feedbacks);
-                        $page_property->save();
-                        $notification = array(
-                            'message' => 'Customer Feedback Deleted Successfully',
-                            'alert-type' => 'success',
-                        );
-                        return back()->with($notification);
-                    }
+
+                $client_feedbacks = array_filter($client_feedbacks, function ($client) use ($id) {
+                    return $client->id !== $id;
+                });
+
+                if (count($client_feedbacks) === 0) {
+                    $page_property->client_feedbacks = null;
+                } else {
+                    $page_property->client_feedbacks = json_encode(array_values($client_feedbacks));
                 }
+
+                $page_property->save();
+
+                $notification = array(
+                    'message' => 'Customer Feedback Deleted Successfully',
+                    'alert-type' => 'success',
+                );
+
+                return back()->with($notification);
             }
         }
 
@@ -737,8 +778,8 @@ class PropertyOperationController extends Controller
             'message' => 'Something Went Wrong',
             'alert-type' => 'error',
         );
-        return back()->with($notification);
 
+        return back()->with($notification);
     }
 
 

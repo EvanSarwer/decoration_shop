@@ -194,7 +194,7 @@
                     </div>
 
                     <div class="row mb-3">
-                      <label for="address_link" class="col-md-4 col-lg-3 col-form-label">Address Link</label>
+                      <label for="address_link" class="col-md-4 col-lg-3 col-form-label">Address Link<small> (Map- iframe)</small></label>
                       <div class="col-md-8 col-lg-9">
                         <textarea name="address_link" class="form-control @error('address_link') is-invalid @enderror" id="address_link" style="height: 80px">{{ (old('address_link')) ? old('address_link') : $page_property->address_link }}</textarea>
                         @error('address_link')
@@ -406,6 +406,14 @@
 
 
               </div>
+
+              <script>
+                // Use the Blade syntax to echo the PHP variable into JavaScript
+                var myVariable = @json($page_property);
+            
+                // Log the value to the console
+                console.log(myVariable);
+              </script>
 
               <div class="card-body">
                 <h5 class="card-title">Customer Feedback <span>| Today</span></h5>
