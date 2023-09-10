@@ -163,7 +163,7 @@
                 <div class="col-lg-4 col-md-6">
                     <h4 class="text-light mb-4">Address</h4>
                     <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>{{$page_property_view->address}}</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>{{$page_property_view->whatsapp_number}}</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>{{$page_property_view->phone_number}}</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>{{$page_property_view->email}}</p>
                     <div class="d-flex pt-2">
                         @if($page_property_view->twitter_link) <a class="btn btn-outline-light btn-social" href="{{$page_property_view->twitter_link}}" target="_blank" ><i class="fab fa-twitter"></i></a> @endif

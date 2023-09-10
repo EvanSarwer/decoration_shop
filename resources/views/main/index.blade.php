@@ -36,43 +36,79 @@
     <!-- Carousel Start -->
     <div class="container-fluid p-0 mb-5">
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                <img class="w-100" src="{{ (!empty($page_property_view->slider_image1)) ? url('page_assets/img/'.$page_property_view->slider_image1) : url('upload/No_Image_Available.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
-                    <div class="carousel-caption d-flex align-items-center">
-                        <div class="container">
-                            <div class="row align-items-center justify-content-center justify-content-lg-start">
-                                <div class="col-10 col-lg-7 text-center text-lg-start">
-                                    <h3 class="text-white text-uppercase animated slideInDown">IT'S NOT A PARTY WITHOUT</h3>
-                                    <h1 class="display-3 text-white mb-4 animated slideInDown">BALLOONS!</h1>
-                                    <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">20,000+ BALLOON DESIGN IN STOCK<i class="fa fa-arrow-right ms-3"></i></a>
-                                    <h6 class="text-white text-uppercase mb-3 pt-3 animated slideInDown">Kanak Decoration offers one of the largest </br> balloon selections in the world</h6>
-                                </div>
-                                <!-- <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
-                                    <img class="img-fluid" src="{{ asset('page_assets/img/carousel-1.png') }}" alt="">
-                                </div> -->
+          <div class="carousel-inner">
+              <div class="carousel-item active">
+                  <img class="w-100" src="{{ (!empty($page_property_view->slider_image1)) ? url('page_assets/img/'.$page_property_view->slider_image1) : url('upload/No_Image_Available.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
+                  <div class="carousel-caption d-flex align-items-center">
+                      <div class="container">
+                          <div class="row align-items-center justify-content-center justify-content-lg-start">
+                              <div class="col-10 col-lg-7 text-center text-lg-start">
+                                  <h3 class="text-white text-uppercase animated slideInDown">IT'S NOT A PARTY WITHOUT</h3>
+                                  <h1 class="display-3 text-white mb-4 animated slideInDown">BALLOONS!</h1>
+                                  <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">20,000+ BALLOON DESIGN IN STOCK<i class="fa fa-arrow-right ms-3"></i></a>
+                                  <h6 class="text-white text-uppercase mb-3 pt-3 animated slideInDown">Kanak Decoration offers one of the largest </br> balloon selections in the world</h6>
+                              </div>
+                              <!-- <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
+                                  <img class="img-fluid" src="{{ asset('page_assets/img/carousel-1.png') }}" alt="">
+                              </div> -->
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="carousel-item">
+                  <img class="w-100" src="{{ (!empty($page_property_view->slider_image2)) ? url('page_assets/img/'.$page_property_view->slider_image2) : url('upload/No_Image_Available.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
+                  <div class="carousel-caption d-flex align-items-center">
+                      <div class="container">
+                          <div class="row align-items-center justify-content-center justify-content-lg-start">
+                              <div class="col-10 col-lg-7 text-center text-lg-start">
+                                  <h3 class="text-white text-uppercase animated slideInDown">IT'S NOT A PARTY WITHOUT</h3>
+                                  <h1 class="display-3 text-white mb-4 animated slideInDown">BALLOONS!</h1>
+                                  <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">20,000+ BALLOON DESIGN IN STOCK<i class="fa fa-arrow-right ms-3"></i></a>
+                                  <h6 class="text-white text-uppercase mb-3 pt-3 animated slideInDown">Kanak Decoration offers one of the largest </br> balloon selections in the world</h6>
+                              </div>
+                              <!-- <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
+                                  <img class="img-fluid" src="{{ asset('page_assets/img/carousel-2.png') }}" alt="">
+                              </div> -->
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="carousel-item">
+                <img class="w-100" src="{{ (!empty($page_property_view->slider_image3)) ? url('page_assets/img/'.$page_property_view->slider_image2) : url('upload/No_Image_Available.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
+                <div class="carousel-caption d-flex align-items-center">
+                    <div class="container">
+                        <div class="row align-items-center justify-content-center justify-content-lg-start">
+                            <div class="col-10 col-lg-7 text-center text-lg-start">
+                                <h3 class="text-white text-uppercase animated slideInDown">IT'S NOT A PARTY WITHOUT</h3>
+                                <h1 class="display-3 text-white mb-4 animated slideInDown">BALLOONS!</h1>
+                                <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">20,000+ BALLOON DESIGN IN STOCK<i class="fa fa-arrow-right ms-3"></i></a>
+                                <h6 class="text-white text-uppercase mb-3 pt-3 animated slideInDown">Kanak Decoration offers one of the largest </br> balloon selections in the world</h6>
                             </div>
+                            <!-- <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
+                                <img class="img-fluid" src="{{ asset('page_assets/img/carousel-2.png') }}" alt="">
+                            </div> -->
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <img class="w-100" src="{{ (!empty($page_property_view->slider_image2)) ? url('page_assets/img/'.$page_property_view->slider_image2) : url('upload/No_Image_Available.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
-                    <div class="carousel-caption d-flex align-items-center">
-                        <div class="container">
-                            <div class="row align-items-center justify-content-center justify-content-lg-start">
-                                <div class="col-10 col-lg-7 text-center text-lg-start">
-                                    <h3 class="text-white text-uppercase animated slideInDown">IT'S NOT A PARTY WITHOUT</h3>
-                                    <h1 class="display-3 text-white mb-4 animated slideInDown">BALLOONS!</h1>
-                                    <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">20,000+ BALLOON DESIGN IN STOCK<i class="fa fa-arrow-right ms-3"></i></a>
-                                    <h6 class="text-white text-uppercase mb-3 pt-3 animated slideInDown">Kanak Decoration offers one of the largest </br> balloon selections in the world</h6>
-                                <!-- </div>
-                                <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
-                                    <img class="img-fluid" src="{{ asset('page_assets/img/carousel-2.png') }}" alt="">
-                                </div> -->
+              </div>
+              <div class="carousel-item">
+                <img class="w-100" src="{{ (!empty($page_property_view->slider_image4)) ? url('page_assets/img/'.$page_property_view->slider_image2) : url('upload/No_Image_Available.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
+                <div class="carousel-caption d-flex align-items-center">
+                    <div class="container">
+                        <div class="row align-items-center justify-content-center justify-content-lg-start">
+                            <div class="col-10 col-lg-7 text-center text-lg-start">
+                                <h3 class="text-white text-uppercase animated slideInDown">IT'S NOT A PARTY WITHOUT</h3>
+                                <h1 class="display-3 text-white mb-4 animated slideInDown">BALLOONS!</h1>
+                                <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">20,000+ BALLOON DESIGN IN STOCK<i class="fa fa-arrow-right ms-3"></i></a>
+                                <h6 class="text-white text-uppercase mb-3 pt-3 animated slideInDown">Kanak Decoration offers one of the largest </br> balloon selections in the world</h6>
                             </div>
+                            <!-- <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
+                                <img class="img-fluid" src="{{ asset('page_assets/img/carousel-2.png') }}" alt="">
+                            </div> -->
                         </div>
                     </div>
                 </div>
+              </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
                 data-bs-slide="prev">
@@ -921,53 +957,53 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="d-flex bg-light py-5 px-4">
+                    {{-- <div class="d-flex bg-light py-5 px-4">
                         <i><svg height="70" version="1.1" width="70" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
-                    <path d="M76.776,277.958c12.542-3.531,25.023-7.27,37.448-11.189c24.507-7.728,48.79-16.154,72.896-25.047
-                      c52.903-19.517,104.956-41.294,156.67-63.75c1.395,5.216,2.889,10.396,4.741,15.409c3.085,8.348,10.204,15.733,19.92,13.438
-                      c10.313-2.435,16.884-14.034,23.26-21.567c7.579-8.953,15.263-17.798,22.96-26.649c7.682-8.834,15.375-17.659,23.073-26.479
-                      c7.573-8.677,16.061-17.159,22.792-26.502c6.416-8.906,3.581-18.509-3.357-26.101c-6.892-7.543-14.674-14.444-22.624-20.843
-                      c-16.365-13.171-34.002-24.618-52.62-34.34c-9.163-4.784-18.535-9.144-28.052-13.174c-9.161-3.879-18.801-8.581-28.581-10.612
-                      c-9.756-2.025-20.39,1.417-23.567,11.698c-1.626,5.263-0.479,10.709,0.605,15.959c1.265,6.126,2.651,12.229,4.129,18.307
-                      c2.112,8.684,4.448,17.312,6.971,25.884c-50.848,12.518-100.737,29.209-150.404,45.708
-                      c-25.057,8.323-50.059,16.812-75.003,25.467c-12.648,4.388-25.246,8.903-37.829,13.473c-9.806,3.562-19.789,7.139-28.335,13.28
-                      c-8.377,6.019-14.769,14.447-16.525,24.797c-1.835,10.802,0.255,22.423,3.482,32.761c3.62,11.598,8.27,22.984,14.006,33.697
-                      c4.617,8.624,9.879,18.069,19.91,21.069C53.79,285.957,66.213,280.933,76.776,277.958z M319.084,16.263
-                      c7.689,1.109,15.192,4.634,22.363,7.486c39.584,15.736,73.002,38.618,104.938,66.398c1.891,1.645,3.946,3.65,3.837,6.154
-                      c-0.074,1.71-1.166,3.185-2.213,4.539c-24.056,31.073-47.615,64.486-77.603,90.236c-1.424,1.223-3.232,2.503-5.019,1.926
-                      c-1.624-0.525-2.397-2.332-2.969-3.941c-4.334-12.184-8.574-24.414-12.496-36.737c-7.012-21.928-13.894-43.912-20.584-65.94
-                      c-4.511-14.856-8.295-29.971-11.879-45.114c-0.506-2.725-0.998-5.453-1.465-8.185c-0.746-4.367-1.964-9.079-1.939-13.529
-                      C314.078,15.588,315.602,15.76,319.084,16.263z M42.888,271.742c-1.453-0.691-2.742-1.627-3.908-2.718
-                      c-2.155-2.02-3.886-4.574-5.447-7.112c-7.276-11.827-12.632-24.834-15.795-38.355c-2.211-9.457-3.226-19.915,1.428-28.441
-                      c5.394-9.881,16.816-14.536,27.366-18.462c37.716-14.033,75.388-28.173,113.264-41.758
-                      c51.898-18.614,104.113-36.25,155.822-55.398c9.018,27.47,17.048,55.263,24.072,83.309
-                      c-91.237,39.803-182.751,79.708-278.149,108.121C55.432,272.748,48.645,274.478,42.888,271.742z"></path>
-                    <path d="M503.173,284.113c-3.62-11.598-8.27-22.984-14.006-33.697c-4.617-8.624-9.879-18.069-19.91-21.069
-                      c-11.046-3.303-23.468,1.721-34.03,4.696c-12.542,3.531-25.023,7.27-37.448,11.189c-24.507,7.728-48.79,16.154-72.896,25.047
-                      c-52.903,19.517-104.956,41.294-156.67,63.75c-1.395-5.216-2.889-10.396-4.741-15.409c-3.085-8.348-10.204-15.733-19.92-13.438
-                      c-10.313,2.435-16.884,14.034-23.26,21.567c-7.579,8.953-15.263,17.798-22.96,26.649c-7.682,8.834-15.375,17.658-23.073,26.479
-                      c-7.573,8.677-16.061,17.16-22.792,26.502c-6.416,8.906-3.581,18.509,3.357,26.101c6.892,7.543,14.674,14.444,22.624,20.843
-                      c16.365,13.171,34.002,24.618,52.62,34.34c9.163,4.784,18.535,9.144,28.052,13.174c9.161,3.879,18.801,8.581,28.581,10.612
-                      c9.756,2.025,20.39-1.417,23.567-11.698c1.626-5.263,0.479-10.709-0.605-15.959c-1.266-6.126-2.651-12.229-4.129-18.307
-                      c-2.112-8.684-4.448-17.312-6.971-25.884c50.848-12.518,100.737-29.209,150.404-45.708c25.057-8.323,50.059-16.812,75.003-25.467
-                      c12.648-4.388,25.246-8.903,37.829-13.473c9.806-3.562,19.789-7.139,28.335-13.28c8.377-6.019,14.769-14.447,16.525-24.797
-                      C508.489,306.072,506.4,294.451,503.173,284.113z M196.529,495.731c-1.087,0.65-2.389,0.571-3.656,0.281
-                      c-0.471-0.108-0.938-0.245-1.387-0.386c-47.29-14.753-91.086-40.585-126.874-74.837c-1.108-1.062-2.262-2.22-2.595-3.719
-                      c-0.495-2.228,0.957-4.378,2.337-6.196c22.939-30.238,46.905-61.693,74.631-87.734c2.099-1.973,5.501-5.609,8.357-3.656
-                      c2.451,1.674,3.812,8.031,4.693,10.527c18.256,51.779,35.674,104.789,46.007,158.79
-                      C198.517,491.284,198.698,494.435,196.529,495.731z M495.788,304.454c-0.214,4.481-1.176,8.839-3.3,12.803
-                      c-4.496,8.39-13.403,13.47-22.352,16.721c-20.112,7.305-40.397,14.21-60.567,21.437c-33.25,11.912-66.5,23.825-99.75,35.737
-                      c-36.878,13.213-75.082,24.793-111.036,40.417c-0.143,0.062-2.379,0.878-2.318,1.071c-2.967-9.635-6.174-19.196-9.623-28.671
-                      c-4.348-17.701-9.045-35.295-14.076-52.832c-0.202-0.705-0.395-1.418-0.591-2.127c0.018-0.007,0.036-0.013,0.054-0.021
-                      c49.821-21.298,99.672-42.551,150.058-62.487c25.196-9.969,50.526-19.611,76.036-28.752c11.564-4.144,23.18-7.99,34.865-11.715
-                      c10.428-3.326,21.996-10.289,33.194-6.272c7.652,2.744,12.61,10.082,16.335,17.306c5.1,9.89,8.925,20.436,11.35,31.296
-                      C495.236,293.596,496.044,299.112,495.788,304.454z"></path>
-              </svg></i>
+                          <path d="M76.776,277.958c12.542-3.531,25.023-7.27,37.448-11.189c24.507-7.728,48.79-16.154,72.896-25.047
+                            c52.903-19.517,104.956-41.294,156.67-63.75c1.395,5.216,2.889,10.396,4.741,15.409c3.085,8.348,10.204,15.733,19.92,13.438
+                            c10.313-2.435,16.884-14.034,23.26-21.567c7.579-8.953,15.263-17.798,22.96-26.649c7.682-8.834,15.375-17.659,23.073-26.479
+                            c7.573-8.677,16.061-17.159,22.792-26.502c6.416-8.906,3.581-18.509-3.357-26.101c-6.892-7.543-14.674-14.444-22.624-20.843
+                            c-16.365-13.171-34.002-24.618-52.62-34.34c-9.163-4.784-18.535-9.144-28.052-13.174c-9.161-3.879-18.801-8.581-28.581-10.612
+                            c-9.756-2.025-20.39,1.417-23.567,11.698c-1.626,5.263-0.479,10.709,0.605,15.959c1.265,6.126,2.651,12.229,4.129,18.307
+                            c2.112,8.684,4.448,17.312,6.971,25.884c-50.848,12.518-100.737,29.209-150.404,45.708
+                            c-25.057,8.323-50.059,16.812-75.003,25.467c-12.648,4.388-25.246,8.903-37.829,13.473c-9.806,3.562-19.789,7.139-28.335,13.28
+                            c-8.377,6.019-14.769,14.447-16.525,24.797c-1.835,10.802,0.255,22.423,3.482,32.761c3.62,11.598,8.27,22.984,14.006,33.697
+                            c4.617,8.624,9.879,18.069,19.91,21.069C53.79,285.957,66.213,280.933,76.776,277.958z M319.084,16.263
+                            c7.689,1.109,15.192,4.634,22.363,7.486c39.584,15.736,73.002,38.618,104.938,66.398c1.891,1.645,3.946,3.65,3.837,6.154
+                            c-0.074,1.71-1.166,3.185-2.213,4.539c-24.056,31.073-47.615,64.486-77.603,90.236c-1.424,1.223-3.232,2.503-5.019,1.926
+                            c-1.624-0.525-2.397-2.332-2.969-3.941c-4.334-12.184-8.574-24.414-12.496-36.737c-7.012-21.928-13.894-43.912-20.584-65.94
+                            c-4.511-14.856-8.295-29.971-11.879-45.114c-0.506-2.725-0.998-5.453-1.465-8.185c-0.746-4.367-1.964-9.079-1.939-13.529
+                            C314.078,15.588,315.602,15.76,319.084,16.263z M42.888,271.742c-1.453-0.691-2.742-1.627-3.908-2.718
+                            c-2.155-2.02-3.886-4.574-5.447-7.112c-7.276-11.827-12.632-24.834-15.795-38.355c-2.211-9.457-3.226-19.915,1.428-28.441
+                            c5.394-9.881,16.816-14.536,27.366-18.462c37.716-14.033,75.388-28.173,113.264-41.758
+                            c51.898-18.614,104.113-36.25,155.822-55.398c9.018,27.47,17.048,55.263,24.072,83.309
+                            c-91.237,39.803-182.751,79.708-278.149,108.121C55.432,272.748,48.645,274.478,42.888,271.742z"></path>
+                          <path d="M503.173,284.113c-3.62-11.598-8.27-22.984-14.006-33.697c-4.617-8.624-9.879-18.069-19.91-21.069
+                            c-11.046-3.303-23.468,1.721-34.03,4.696c-12.542,3.531-25.023,7.27-37.448,11.189c-24.507,7.728-48.79,16.154-72.896,25.047
+                            c-52.903,19.517-104.956,41.294-156.67,63.75c-1.395-5.216-2.889-10.396-4.741-15.409c-3.085-8.348-10.204-15.733-19.92-13.438
+                            c-10.313,2.435-16.884,14.034-23.26,21.567c-7.579,8.953-15.263,17.798-22.96,26.649c-7.682,8.834-15.375,17.658-23.073,26.479
+                            c-7.573,8.677-16.061,17.16-22.792,26.502c-6.416,8.906-3.581,18.509,3.357,26.101c6.892,7.543,14.674,14.444,22.624,20.843
+                            c16.365,13.171,34.002,24.618,52.62,34.34c9.163,4.784,18.535,9.144,28.052,13.174c9.161,3.879,18.801,8.581,28.581,10.612
+                            c9.756,2.025,20.39-1.417,23.567-11.698c1.626-5.263,0.479-10.709-0.605-15.959c-1.266-6.126-2.651-12.229-4.129-18.307
+                            c-2.112-8.684-4.448-17.312-6.971-25.884c50.848-12.518,100.737-29.209,150.404-45.708c25.057-8.323,50.059-16.812,75.003-25.467
+                            c12.648-4.388,25.246-8.903,37.829-13.473c9.806-3.562,19.789-7.139,28.335-13.28c8.377-6.019,14.769-14.447,16.525-24.797
+                            C508.489,306.072,506.4,294.451,503.173,284.113z M196.529,495.731c-1.087,0.65-2.389,0.571-3.656,0.281
+                            c-0.471-0.108-0.938-0.245-1.387-0.386c-47.29-14.753-91.086-40.585-126.874-74.837c-1.108-1.062-2.262-2.22-2.595-3.719
+                            c-0.495-2.228,0.957-4.378,2.337-6.196c22.939-30.238,46.905-61.693,74.631-87.734c2.099-1.973,5.501-5.609,8.357-3.656
+                            c2.451,1.674,3.812,8.031,4.693,10.527c18.256,51.779,35.674,104.789,46.007,158.79
+                            C198.517,491.284,198.698,494.435,196.529,495.731z M495.788,304.454c-0.214,4.481-1.176,8.839-3.3,12.803
+                            c-4.496,8.39-13.403,13.47-22.352,16.721c-20.112,7.305-40.397,14.21-60.567,21.437c-33.25,11.912-66.5,23.825-99.75,35.737
+                            c-36.878,13.213-75.082,24.793-111.036,40.417c-0.143,0.062-2.379,0.878-2.318,1.071c-2.967-9.635-6.174-19.196-9.623-28.671
+                            c-4.348-17.701-9.045-35.295-14.076-52.832c-0.202-0.705-0.395-1.418-0.591-2.127c0.018-0.007,0.036-0.013,0.054-0.021
+                            c49.821-21.298,99.672-42.551,150.058-62.487c25.196-9.969,50.526-19.611,76.036-28.752c11.564-4.144,23.18-7.99,34.865-11.715
+                            c10.428-3.326,21.996-10.289,33.194-6.272c7.652,2.744,12.61,10.082,16.335,17.306c5.1,9.89,8.925,20.436,11.35,31.296
+                            C495.236,293.596,496.044,299.112,495.788,304.454z"></path>
+                          </svg></i>
                         <div class="ps-4">
                             <h5 class="mb-3">8 Days Exchange</h5>
                             <p>Exchange within 6 to 8 working days.at ipsum</p>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="d-flex py-5 px-4">
