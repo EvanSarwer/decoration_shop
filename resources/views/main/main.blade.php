@@ -157,7 +157,7 @@
 
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s"  style="background: linear-gradient(rgba(0, 0, 0, .9), rgba(0, 0, 0, .9)), url('{{ (!empty($page_property_view->slider_images[0]->image)) ? asset('page_assets/img/' . $page_property_view->slider_images[0]->image) : asset('upload/No_Image_Available.jpg') }}') center center no-repeat; background-size: cover;">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-4 col-md-6">

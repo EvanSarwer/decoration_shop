@@ -37,43 +37,51 @@
     <div class="container-fluid p-0 mb-5">
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
-              <div class="carousel-item active">
-                  <img class="w-100" src="{{ (!empty($page_property_view->slider_image1)) ? url('page_assets/img/'.$page_property_view->slider_image1) : url('upload/No_Image_Available.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
-                  <div class="carousel-caption d-flex align-items-center">
-                      <div class="container">
-                          <div class="row align-items-center justify-content-center justify-content-lg-start">
-                              <div class="col-10 col-lg-7 text-center text-lg-start">
-                                  <h3 class="text-white text-uppercase animated slideInDown">IT'S NOT A PARTY WITHOUT</h3>
-                                  <h1 class="display-3 text-white mb-4 animated slideInDown">BALLOONS!</h1>
-                                  <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">20,000+ BALLOON DESIGN IN STOCK<i class="fa fa-arrow-right ms-3"></i></a>
-                                  <h6 class="text-white text-uppercase mb-3 pt-3 animated slideInDown">Kanak Decoration offers one of the largest </br> balloon selections in the world</h6>
-                              </div>
-                              <!-- <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
-                                  <img class="img-fluid" src="{{ asset('page_assets/img/carousel-1.png') }}" alt="">
-                              </div> -->
+            
+
+            <div class="carousel-item active">
+              <img class="w-100" src="{{ (!empty($page_property_view->slider_images[0]->image)) ? url('page_assets/img/'.$page_property_view->slider_images[0]->image) : url('upload/No_Image_Available.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
+              <div class="carousel-caption d-flex align-items-center">
+                  <div class="container">
+                      <div class="row align-items-center justify-content-center justify-content-lg-start">
+                          <div class="col-10 col-lg-7 text-center text-lg-start">
+                              <h3 class="text-white text-uppercase animated slideInDown">IT'S NOT A PARTY WITHOUT</h3>
+                              <h1 class="display-3 text-white mb-4 animated slideInDown">BALLOONS!</h1>
+                              <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">20,000+ BALLOON DESIGN IN STOCK<i class="fa fa-arrow-right ms-3"></i></a>
+                              <h6 class="text-white text-uppercase mb-3 pt-3 animated slideInDown">Kanak Decoration offers one of the largest </br> balloon selections in the world</h6>
                           </div>
+                          <!-- <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
+                              <img class="img-fluid" src="{{ asset('page_assets/img/carousel-1.png') }}" alt="">
+                          </div> -->
                       </div>
                   </div>
               </div>
+          </div>
+            @if(isset($page_property_view->slider_images) && count($page_property_view->slider_images) > 1)
+
+            @for ($i = 1; $i < count($page_property_view->slider_images); $i++)
+
               <div class="carousel-item">
-                  <img class="w-100" src="{{ (!empty($page_property_view->slider_image2)) ? url('page_assets/img/'.$page_property_view->slider_image2) : url('upload/No_Image_Available.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
-                  <div class="carousel-caption d-flex align-items-center">
-                      <div class="container">
-                          <div class="row align-items-center justify-content-center justify-content-lg-start">
-                              <div class="col-10 col-lg-7 text-center text-lg-start">
-                                  <h3 class="text-white text-uppercase animated slideInDown">IT'S NOT A PARTY WITHOUT</h3>
-                                  <h1 class="display-3 text-white mb-4 animated slideInDown">BALLOONS!</h1>
-                                  <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">20,000+ BALLOON DESIGN IN STOCK<i class="fa fa-arrow-right ms-3"></i></a>
-                                  <h6 class="text-white text-uppercase mb-3 pt-3 animated slideInDown">Kanak Decoration offers one of the largest </br> balloon selections in the world</h6>
-                              </div>
-                              <!-- <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
-                                  <img class="img-fluid" src="{{ asset('page_assets/img/carousel-2.png') }}" alt="">
-                              </div> -->
-                          </div>
-                      </div>
-                  </div>
+                <img class="w-100" src="{{ (!empty($page_property_view->slider_images[$i]->image)) ? url('page_assets/img/'.$page_property_view->slider_images[$i]->image) : url('upload/No_Image_Available.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
+                <div class="carousel-caption d-flex align-items-center">
+                    <div class="container">
+                        <div class="row align-items-center justify-content-center justify-content-lg-start">
+                            <div class="col-10 col-lg-7 text-center text-lg-start">
+                                <h3 class="text-white text-uppercase animated slideInDown">IT'S NOT A PARTY WITHOUT</h3>
+                                <h1 class="display-3 text-white mb-4 animated slideInDown">BALLOONS!</h1>
+                                <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">20,000+ BALLOON DESIGN IN STOCK<i class="fa fa-arrow-right ms-3"></i></a>
+                                <h6 class="text-white text-uppercase mb-3 pt-3 animated slideInDown">Kanak Decoration offers one of the largest </br> balloon selections in the world</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
               </div>
-              <div class="carousel-item">
+
+              @endfor
+            
+            @endif
+                
+              {{-- <div class="carousel-item">
                 <img class="w-100" src="{{ (!empty($page_property_view->slider_image3)) ? url('page_assets/img/'.$page_property_view->slider_image2) : url('upload/No_Image_Available.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
                 <div class="carousel-caption d-flex align-items-center">
                     <div class="container">
@@ -109,7 +117,7 @@
                     </div>
                 </div>
               </div>
-            </div>
+            </div> --}}
             <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
                 data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -148,6 +156,12 @@
           </li>
           <li class="nav-item pt-1">
             <a class="nav-link" href="#day-5" role="tab" data-bs-toggle="tab">{{$balloonsByCategory[4]["categoryName"] ?? 'Not Available'}}</a>
+          </li>
+          <li class="nav-item pt-1">
+            <a class="nav-link" href="#day-6" role="tab" data-bs-toggle="tab">{{$balloonsByCategory[5]["categoryName"] ?? 'Not Available'}}</a>
+          </li>
+          <li class="nav-item pt-1">
+            <a class="nav-link" href="#day-7" role="tab" data-bs-toggle="tab">{{$balloonsByCategory[6]["categoryName"] ?? 'Not Available'}}</a>
           </li>
         </ul>
 
@@ -423,6 +437,116 @@
           <!-- End Schdule Day 5 -->
 
 
+          <!-- Schdule Day 6 -->
+          <div role="tabpanel" class="col-lg-9  tab-pane fade" id="day-6">
+
+            <section id="hotels" class="section-with-bg">
+
+              <div class="row" data-aos="fade-up" data-aos-delay="100">
+                @if( count($balloonsByCategory) > 5 &&  count($balloonsByCategory[5]["balloonList"]) > 0)
+                  @foreach($balloonsByCategory[5]["balloonList"] as $key => $balloon)
+
+                    <div class="col-lg-4 col-md-6">
+                      <div class="hotel">
+                        <div class="hotel-img">
+                          <img src="{{ (!empty($balloon->image1)) ? url('upload/balloon_images/'.$balloon->image1) : url('upload/No_Image_Available.jpg') }}" style="width: 300px; max-height: 300px; min-height: 300px; object-fit: cover;" alt="Hotel 1" class="img-fluid">
+                        </div>
+                        <h3><a href="{{ route('single.balloon',$balloon->id) }}">{{$balloon->title ?? 'Not Available'}}</a></h3>
+                        <p style="font-size: 20px;">
+                        @if ($balloon->price > 0)
+                          @if ($balloon->offer_percent > 0)
+                            <span>
+                              ₹{{ number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2) }}
+                              <small class="text-decoration-line-through"> ₹{{ number_format($balloon->price, 2) }}</small>
+                            </span> </br>
+                            <span class="badge text-danger">{{ $balloon->offer_percent }}% Offer</span>
+                          @else
+                            ₹{{ number_format($balloon->price, 2) }}
+                          @endif
+                          
+                        @else
+                            <small>Message us for best price</small>
+                        @endif
+                        </p>
+                        <a href="https://api.whatsapp.com/send?phone={{ $page_property_view->whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($balloon->title) }}%0APrice%3A%20%E2%82%B9{{ ($balloon->price > 0) ? (($balloon->offer_percent > 0) ? (number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2)) : (number_format($balloon->price, 2))) : '' }}%0AProduct%20url%3A%20{{ urlencode(route('single.balloon', $balloon->id)) }}" target="_blank" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
+                          style="position: relative; overflow: hidden; background: linear-gradient(135deg, #3498db, #e74c3c); border: none; transition: transform 0.2s, filter 0.2s; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
+                            <span style="display: inline-flex; align-items: center; color: white;">
+                                <i class="bi bi-whatsapp me-2" style="font-size: 1.5rem;"></i> <!-- WhatsApp Icon -->
+                                Book Now
+                            </span>
+                        </a>
+                      </div>
+                    </div>
+
+                  @endforeach
+                @else
+                  <h3><a href="#">Not Available In This Category</a></h3>
+                @endif
+
+
+              </div>
+
+            </section>
+
+          </div>
+          <!-- End Schdule Day 6 -->
+
+
+          <!-- Schdule Day 7 -->
+          <div role="tabpanel" class="col-lg-9  tab-pane fade" id="day-7">
+
+            <section id="hotels" class="section-with-bg">
+
+              <div class="row" data-aos="fade-up" data-aos-delay="100">
+                @if( count($balloonsByCategory) > 6 &&  count($balloonsByCategory[6]["balloonList"]) > 0)
+                  @foreach($balloonsByCategory[6]["balloonList"] as $key => $balloon)
+
+                    <div class="col-lg-4 col-md-6">
+                      <div class="hotel">
+                        <div class="hotel-img">
+                          <img src="{{ (!empty($balloon->image1)) ? url('upload/balloon_images/'.$balloon->image1) : url('upload/No_Image_Available.jpg') }}" style="width: 300px; max-height: 300px; min-height: 300px; object-fit: cover;" alt="Hotel 1" class="img-fluid">
+                        </div>
+                        <h3><a href="{{ route('single.balloon',$balloon->id) }}">{{$balloon->title ?? 'Not Available'}}</a></h3>
+                        <p style="font-size: 20px;">
+                        @if ($balloon->price > 0)
+                          @if ($balloon->offer_percent > 0)
+                            <span>
+                              ₹{{ number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2) }}
+                              <small class="text-decoration-line-through"> ₹{{ number_format($balloon->price, 2) }}</small>
+                            </span> </br>
+                            <span class="badge text-danger">{{ $balloon->offer_percent }}% Offer</span>
+                          @else
+                            ₹{{ number_format($balloon->price, 2) }}
+                          @endif
+                          
+                        @else
+                            <small>Message us for best price</small>
+                        @endif
+                        </p>
+                        <a href="https://api.whatsapp.com/send?phone={{ $page_property_view->whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($balloon->title) }}%0APrice%3A%20%E2%82%B9{{ ($balloon->price > 0) ? (($balloon->offer_percent > 0) ? (number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2)) : (number_format($balloon->price, 2))) : '' }}%0AProduct%20url%3A%20{{ urlencode(route('single.balloon', $balloon->id)) }}" target="_blank" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
+                          style="position: relative; overflow: hidden; background: linear-gradient(135deg, #3498db, #e74c3c); border: none; transition: transform 0.2s, filter 0.2s; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
+                            <span style="display: inline-flex; align-items: center; color: white;">
+                                <i class="bi bi-whatsapp me-2" style="font-size: 1.5rem;"></i> <!-- WhatsApp Icon -->
+                                Book Now
+                            </span>
+                        </a>
+                      </div>
+                    </div>
+
+                  @endforeach
+                @else
+                  <h3><a href="#">Not Available In This Category</a></h3>
+                @endif
+
+
+              </div>
+
+            </section>
+
+          </div>
+          <!-- End Schdule Day 7 -->
+
+
         </div>
 
       </div>
@@ -627,7 +751,7 @@
 
 
     <!-- Fact Start -->
-    <div class="container-fluid fact bg-dark my-5 py-5">
+    <div class="container-fluid fact bg-dark my-5 py-5" style="background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url('{{ (!empty($page_property_view->slider_images[0]->image)) ? asset('page_assets/img/' . $page_property_view->slider_images[0]->image) : asset('upload/No_Image_Available.jpg') }}'); background-position: center center; background-repeat: no-repeat; background-size: cover;">
         <div class="container">
             <div class="row g-4">
 
@@ -1023,7 +1147,7 @@
 
 
     <!-- Booking Start -->
-    <div class="container-fluid bg-secondary booking my-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container-fluid bg-secondary booking my-5 wow fadeInUp" data-wow-delay="0.1s"  style="background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url('{{ (!empty($page_property_view->slider_images[1]->image)) ? asset('page_assets/img/' . $page_property_view->slider_images[1]->image) : asset('upload/No_Image_Available.jpg') }}') center center no-repeat; background-size: cover;">
         <div class="container">
             <div class="row gx-5">
                 <div class="col-lg-6 py-5">

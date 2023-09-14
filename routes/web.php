@@ -146,6 +146,9 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
     // Start Edit Page Property Operations
     Route::get('/user/pageProperty/edit', [PropertyOperationController::class, 'PagePropertyEditView'])->name('user.pageProperty.edit');
 
+    Route::post('/user/sliderImage/add', [PropertyOperationController::class, 'AddSliderImage'])->name('user.sliderImage.add.post');
+    Route::get('/user/sliderImage/delete/{id}', [PropertyOperationController::class, 'SliderImageDelete'])->name('user.sliderImage.delete');
+
     Route::post('/user/pageProperty/edit', [PropertyOperationController::class, 'PagePropertyEditPost'])->name('user.pageProperty.edit.post');
 
     Route::post('/user/customerFeedback/add', [PropertyOperationController::class, 'AddCustomerFeedbackPost'])->name('user.add.customerFeedback.post');

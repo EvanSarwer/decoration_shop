@@ -34,7 +34,7 @@
 
 
     <!-- Page Header Start -->
-    <div class="container-fluid page-header mb-5 p-0" style="background-image: url(page_assets/img/carousel-bg-2.jpg);">
+    <div class="container-fluid page-header mb-5 p-0" style="background-image: url('{{ (!empty($page_property_view->slider_images[1]->image)) ? asset('page_assets/img/' . $page_property_view->slider_images[1]->image) : asset('upload/No_Image_Available.jpg') }}');">
         <div class="container-fluid page-header-inner py-5">
             <div class="container text-center">
                 <h1 class="display-3 text-white mb-3 animated slideInDown">Not Found</h1>

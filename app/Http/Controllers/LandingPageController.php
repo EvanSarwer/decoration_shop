@@ -21,7 +21,7 @@ class LandingPageController extends Controller
         $balloonsByCategory = Balloon::orderBy('created_at', 'desc')
                                     ->get()
                                     ->groupBy('category')
-                                    ->take(5) // Limit to top 5 categories
+                                    ->take(7) // Limit to top 5 categories
                                     ->map(function ($balloons, $categoryName) {
                                         return [
                                             'categoryName' => $categoryName,
@@ -37,7 +37,6 @@ class LandingPageController extends Controller
         $occassion_birthday_theme = Occasion::where('category', 'LIKE', '%birthday%')->where('featuring','yes')->first();
         $occassion_gender_theme = Occasion::where('category', 'LIKE', '%gender%')->where('featuring','yes')->first();
         $occassion_bubble_theme = Occasion::where('category', 'LIKE', '%bubble%')->where('featuring','yes')->first();
-
 
 
         return view('main.index',compact('recent_balloons','balloonsByCategory','holidays','occassion_love_theme','occassion_birthday_theme','occassion_gender_theme','occassion_bubble_theme'));

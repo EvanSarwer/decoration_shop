@@ -6,6 +6,7 @@ use App\Models\Balloon;
 use App\Models\Holiday;
 use App\Models\Occasion;
 use App\Models\PageProperty;
+use App\Models\SliderImage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -189,9 +190,17 @@ class PropertyOperationController extends Controller
 
     public function BalloonDelete($id){
         $balloon = Balloon::findOrFail($id);
+        $destination = 'upload/balloon_images/'.$balloon->image1;
+        if(File::exists($destination)){
+            File::delete($destination);
+        }
         $balloon->delete();
 
-        return back();
+        $notification = array(
+            'message' => 'Balloon Item Deleted Successfully',
+            'alert-type' => 'success',
+        );
+        return back()->with($notification);
     }
 
     // End Balloon
@@ -352,9 +361,17 @@ class PropertyOperationController extends Controller
 
     public function OccasionDelete($id){
         $occasion = Occasion::findOrFail($id);
+        $destination = 'upload/occasion_images/'.$occasion->image1;
+        if(File::exists($destination)){
+            File::delete($destination);
+        }
         $occasion->delete();
 
-        return back();
+        $notification = array(
+            'message' => 'Occasion Item Deleted Successfully',
+            'alert-type' => 'success',
+        );
+        return back()->with($notification);
     }
     
 
@@ -509,9 +526,17 @@ class PropertyOperationController extends Controller
 
     public function HolidayDelete($id){
         $holiday = Holiday::findOrFail($id);
+        $destination = 'upload/holiday_images/'.$holiday->image1;
+        if(File::exists($destination)){
+            File::delete($destination);
+        }
         $holiday->delete();
 
-        return back();
+        $notification = array(
+            'message' => 'Seasonal & Holiday Item Deleted Successfully',
+            'alert-type' => 'success',
+        );
+        return back()->with($notification);
     }
     
 
@@ -528,8 +553,58 @@ class PropertyOperationController extends Controller
                 $page_property->client_feedbacks = json_decode($page_property->client_feedbacks);
             }
         }
+
+        $slider_images = SliderImage::all();
             
-        return view('admin.property_operation.edit_page_property',compact('page_property'));
+        return view('admin.property_operation.edit_page_property',compact('page_property', 'slider_images'));
+    }
+
+    public function AddSliderImage(Request $request){
+        // Validation
+        $request->validate([
+            'slider_image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3072'],
+        ]);
+
+        $slider_image = new SliderImage();
+
+        if($request->hasfile('slider_image')){
+            $file = $request->file('slider_image');
+            $filename = date('YmdHi').$file->getClientOriginalName();
+            $img = Image::make(file_get_contents($file));
+            $img->save(\public_path('page_assets/img/'.$filename),60);
+            $slider_image['image'] = $filename;
+
+            $slider_image->save();
+
+            $notification = array(
+                'message' => 'Slider Image Added Successfully',
+                'alert-type' => 'success',
+            );
+            return back()->with($notification);
+        }
+
+        $notification = array(
+            'message' => 'Slider Image Not Added',
+            'alert-type' => 'error',
+        );
+        return back()->with($notification);
+
+    }
+
+
+    public function SliderImageDelete($id){
+        $slider_image = SliderImage::findOrFail($id);
+        $destination = 'page_assets/img/'.$slider_image->image;
+        if(File::exists($destination)){
+            File::delete($destination);
+        }
+        $slider_image->delete();
+
+        $notification = array(
+            'message' => 'Slider Image Deleted Successfully',
+            'alert-type' => 'success',
+        );
+        return back()->with($notification);
     }
 
 
@@ -539,8 +614,6 @@ class PropertyOperationController extends Controller
         // Validation
         $request->validate([
 
-            'slider_image1' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3072'],
-            'slider_image2' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3072'],
             'about_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:3072'],
             'whatsapp_number' => 'required',
             'phone_number' => 'required',
@@ -579,34 +652,6 @@ class PropertyOperationController extends Controller
         $page_property->compleate_projects = $request->compleate_projects;
 
 
-        if($request->hasfile('slider_image1')){
-            $destination = 'page_assets/img/'.$page_property->slider_image1;
-            if(File::exists($destination)){
-                File::delete($destination);
-            }
-            $file = $request->file('slider_image1');
-            // $filename = date('YmdHi').$file->getClientOriginalName();
-            $filename = 'carousel-bg-1.jpg';
-            //$file->move(public_path('page_assets/img'),$filename);
-            $img = Image::make(file_get_contents($file));
-            $img->save(\public_path('page_assets/img/'.$filename),60);
-            $balloon['slider_image1'] = $filename;
-        }
-
-        if($request->hasfile('slider_image2')){
-            $destination = 'page_assets/img/'.$page_property->slider_image2;
-            if(File::exists($destination)){
-                File::delete($destination);
-            }
-            $file = $request->file('slider_image2');
-            // $filename = date('YmdHi').$file->getClientOriginalName();
-            $filename = 'carousel-bg-2.jpg';
-            //$file->move(public_path('page_assets/img'),$filename);
-            $img = Image::make(file_get_contents($file));
-            $img->save(\public_path('page_assets/img/'.$filename),60);
-            $balloon['slider_image2'] = $filename;
-        }
-
         if($request->hasfile('about_image')){
             $destination = 'page_assets/img/'.$page_property->about_image;
             if(File::exists($destination)){
@@ -620,19 +665,6 @@ class PropertyOperationController extends Controller
             $img->save(\public_path('page_assets/img/'.$filename),60);
             $balloon['about_image'] = $filename;
         }
-
-
-
-        // if($request->hasfile('brand')){
-        //     $destination = 'upload/balloon_images/'.$balloon->brand;
-        //     if(File::exists($destination)){
-        //         File::delete($destination);
-        //     }
-        //     $file = $request->file('brand');
-        //     $filename = date('YmdHi').$file->getClientOriginalName();
-        //     $file->move(public_path('upload/balloon_images'),$filename);
-        //     $balloon['brand'] = $filename;
-        // }
 
         $page_property->save();
 

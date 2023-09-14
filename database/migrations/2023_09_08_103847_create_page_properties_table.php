@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('phone_number');
             $table->string('email');
             $table->string('opening_hours1')->nullable();
-            $table->string('slider_image1')->default('carousel-bg-1.jpg');
-            $table->string('slider_image2')->default('carousel-bg-2.jpg');
+            // $table->string('slider_image1')->default('carousel-bg-1.jpg');
+            // $table->string('slider_image2')->default('carousel-bg-2.jpg');
             $table->string('about_image')->default('about.jpg');
             $table->text('address');
             $table->text('address_link');

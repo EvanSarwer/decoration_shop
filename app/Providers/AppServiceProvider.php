@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\SliderImage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
             if($page_property_view->client_feedbacks != null){
                 $page_property_view->client_feedbacks = json_decode($page_property_view->client_feedbacks);
             }
+            $page_property_view->slider_images = SliderImage::all();
             
             View::share('page_property_view', $page_property_view);
         }

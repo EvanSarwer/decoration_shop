@@ -77,6 +77,101 @@
 
 
 
+
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+            
+            <!-- Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+  
+                <div class="filter">
+
+  
+                  <form method="POST" action="{{ route('user.sliderImage.add.post') }}" enctype="multipart/form-data">
+                    @csrf
+
+                    <div x-data="{ slider_image: '{{ url('upload/No_Image_Available.jpg') }}'  }" class="row mb-3">
+                      <div class="col-md-4 col-lg-3 col-form-label">
+                        <button type="submit" class="btn btn-primary ml-4 mt-3">Add Slider Image</button>
+                      </div>
+                      <div class="col-md-8 col-lg-9">
+                        <img x-bind:src="slider_image" alt="Profile" class="img-responsive" style="max-width: 150px; max-height: 100px;">
+                          
+                        <div class="pt-2">
+                          <input x-on:change="slider_image = URL.createObjectURL($event.target.files[0])" name="slider_image" type="file" class="form-control @error('slider_image') is-invalid @enderror" id="slider_image">
+                          @error('slider_image')
+                            <span class="text-danger">{{ $message }}</span>
+                          @enderror
+                        </div>
+                      </div>
+                    </div>
+
+                  </form>
+  
+
+                </div>
+  
+                <div class="card-body">
+                  <h5 class="card-title">Slider Images</h5>
+  
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">Slider Image - Preview</th>
+                        <th scope="col">Operation</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    @if(isset($slider_images) && count($slider_images) > 0)
+                      @foreach($slider_images as $key => $slider_image)
+                      <tr>
+                        <th scope="row"><a href="#"><img src="{{ (!empty($slider_image->image)) ? url('page_assets/img/'.$slider_image->image) : url('upload/No_Image_Available.jpg') }}" alt="Preview" class="img-fluid" style="max-width: 150px;"></a></th>
+                        
+                        <td>
+                          <a href="{{ route('user.sliderImage.delete', $slider_image->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete?')">Delete</a>
+                        </td>
+                      </tr>
+                      @endforeach
+                    @else
+                        <tr>
+                        <td colspan="6">No slider images available.</td>
+                      </tr>
+                    @endif
+  
+                      
+                    </tbody>
+                  </table>
+  
+                </div>
+  
+              </div>
+            </div><!-- End Recent Sales -->
+  
+          </div>
+        </div><!-- End Left side columns -->
+  
+        <!-- Right side columns -->
+        
+  
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="row">
 
         <!-- Left side columns -->
@@ -104,33 +199,6 @@
                   <!-- Profile Edit Form -->
                   <form method="POST" action="{{ route('user.pageProperty.edit.post') }}" enctype="multipart/form-data">
                     @csrf
-
-                    <div x-data="{ slider_image1: '{{ (!empty($page_property->slider_image1)) ? url('page_assets/img/'.$page_property->slider_image1) : url('upload/No_Image_Available.jpg') }}', 
-                                    slider_image2: '{{ (!empty($page_property->slider_image2)) ? url('page_assets/img/'.$page_property->slider_image2) : url('upload/No_Image_Available.jpg') }}'  }" class="row mb-3">
-                        <label for="sliderImage" class="col-md-4 col-lg-3 col-form-label">Slider Image</label>
-                        <div class="col-md-8 col-lg-9">
-                            <div class="row">
-
-                              <div class="col"><img x-bind:src="slider_image1" alt="Profile"></br><small>Image 1</small></div>
-                              <div class="col"><img x-bind:src="slider_image2" alt="Profile"></br><small>Image 2</small></div>
-
-                            </div>
-                            
-                            <div class="pt-2">
-                              <input x-on:change="slider_image1 = URL.createObjectURL($event.target.files[0])" name="slider_image1" type="file" class="form-control @error('slider_image1') is-invalid @enderror" id="slider_image1">
-                              @error('slider_image1')
-                                <span class="text-danger">{{ $message }}</span>
-                              @enderror
-
-                              </br>
-
-                              <input x-on:change="slider_image2 = URL.createObjectURL($event.target.files[0])" name="slider_image2" type="file" class="form-control @error('slider_image2') is-invalid @enderror" id="slider_image2">
-                              @error('slider_image2')
-                                <span class="text-danger">{{ $message }}</span>
-                              @enderror
-                            </div>
-                        </div>
-                    </div>
 
 
                     <div x-data="{ about_image: '{{ (!empty($page_property->about_image)) ? url('page_assets/img/'.$page_property->about_image) : url('upload/No_Image_Available.jpg') }}'  }" class="row mb-3">
