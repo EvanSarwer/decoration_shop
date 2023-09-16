@@ -81,43 +81,7 @@
             
             @endif
                 
-              {{-- <div class="carousel-item">
-                <img class="w-100" src="{{ (!empty($page_property_view->slider_image3)) ? url('page_assets/img/'.$page_property_view->slider_image2) : url('upload/No_Image_Available.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
-                <div class="carousel-caption d-flex align-items-center">
-                    <div class="container">
-                        <div class="row align-items-center justify-content-center justify-content-lg-start">
-                            <div class="col-10 col-lg-7 text-center text-lg-start">
-                                <h3 class="text-white text-uppercase animated slideInDown">IT'S NOT A PARTY WITHOUT</h3>
-                                <h1 class="display-3 text-white mb-4 animated slideInDown">BALLOONS!</h1>
-                                <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">20,000+ BALLOON DESIGN IN STOCK<i class="fa fa-arrow-right ms-3"></i></a>
-                                <h6 class="text-white text-uppercase mb-3 pt-3 animated slideInDown">Kanak Decoration offers one of the largest </br> balloon selections in the world</h6>
-                            </div>
-                            <!-- <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
-                                <img class="img-fluid" src="{{ asset('page_assets/img/carousel-2.png') }}" alt="">
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <img class="w-100" src="{{ (!empty($page_property_view->slider_image4)) ? url('page_assets/img/'.$page_property_view->slider_image2) : url('upload/No_Image_Available.jpg') }}" alt="Image" style="max-width: 100%; max-height: 900px; object-fit: cover;">
-                <div class="carousel-caption d-flex align-items-center">
-                    <div class="container">
-                        <div class="row align-items-center justify-content-center justify-content-lg-start">
-                            <div class="col-10 col-lg-7 text-center text-lg-start">
-                                <h3 class="text-white text-uppercase animated slideInDown">IT'S NOT A PARTY WITHOUT</h3>
-                                <h1 class="display-3 text-white mb-4 animated slideInDown">BALLOONS!</h1>
-                                <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">20,000+ BALLOON DESIGN IN STOCK<i class="fa fa-arrow-right ms-3"></i></a>
-                                <h6 class="text-white text-uppercase mb-3 pt-3 animated slideInDown">Kanak Decoration offers one of the largest </br> balloon selections in the world</h6>
-                            </div>
-                            <!-- <div class="col-lg-5 d-none d-lg-flex animated zoomIn">
-                                <img class="img-fluid" src="{{ asset('page_assets/img/carousel-2.png') }}" alt="">
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-              </div>
-            </div> --}}
+              
             <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
                 data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -141,7 +105,114 @@
             <h1>Party Decorations</h1>
         </div>
 
-        <ul class="nav nav-tabs pt-4" role="tablist" data-aos="fade-up" data-aos-delay="100">
+
+        {{-- @php
+        dd($balloonsByCategory[3]->balloons[1]->title);
+    @endphp --}}
+
+
+
+    <section id="hotels" class="section-with-bg">
+
+
+
+      @if(isset($balloonsByCategory) && count($balloonsByCategory) > 0 )
+        @foreach($balloonsByCategory as $category)
+          <div class="card mt-5">
+            <div class="card-header">
+
+
+              <div class="row">
+                <div class="col">
+                    <a href="{{ route('balloonsByCategory', $category->id) }}">
+                        <h2 class="card-title" style="font-family: 'Arial', sans-serif; font-weight: bold; color: #007bff; text-decoration: underline;">
+                            {{$category->category_name}}
+                        </h2>
+                    </a>
+                </div>
+                <div class="col-auto">
+                    <a href="{{ route('balloonsByCategory', $category->id) }}" class="btn btn-outline-info rounded">
+                        View More
+                    </a>
+                </div>
+            </div>
+
+              
+            </div>
+
+            <div class="card-body row"  data-aos="fade-up" data-aos-delay="100">
+
+              @if(isset($category->balloons) && count($category->balloons) > 0 )
+                @foreach($category->balloons as $balloon)
+                  <div class="col-lg-3 col-md-3">
+                    <div class="hotel">
+                      <div class="hotel-img">
+                        <img src="{{ (!empty($balloon->image1)) ? url('upload/balloon_images/'.$balloon->image1) : url('upload/No_Image_Available.jpg') }}" style="width: 300px; max-height: 300px; min-height: 300px; object-fit: cover;" alt="Hotel 1" class="img-fluid">
+                      </div>
+                      <h3><a href="{{ route('single.balloon', $balloon->id) }}">{{$balloon->title ?? 'Not Available'}}</a></h3>
+                      <p style="font-size: 20px;">
+                      @if ($balloon->price > 0)
+                          @if ($balloon->offer_percent > 0)
+                            <span>
+                              ₹{{ number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2) }}
+                              <small class="text-decoration-line-through"> ₹{{ number_format($balloon->price, 2) }}</small>
+                            </span> </br>
+                            <span class="badge text-danger">{{ $balloon->offer_percent }}% Offer</span>
+                          @else
+                            ₹{{ number_format($balloon->price, 2) }}
+                          @endif
+                      @else
+                        <small>Message us for best price</small>
+                      @endif
+                      </p>
+                      <a href="https://api.whatsapp.com/send?phone={{ $page_property_view->whatsapp_number }}&text=I%20want%20to%20know%20about%20this%20product.%0AProduct%20Title%3A%20{{ urlencode($balloon->title) }}%0APrice%3A%20%E2%82%B9{{ ($balloon->price > 0) ? (($balloon->offer_percent > 0) ? (number_format($balloon->price - ($balloon->price * ($balloon->offer_percent / 100)), 2)) : (number_format($balloon->price, 2))) : '' }}%0AProduct%20url%3A%20{{ urlencode(route('single.balloon', $balloon->id)) }}" target="_blank" class="btn btn-success rounded-pill py-2 px-4 d-flex align-items-center justify-content-center mb-3"
+                        style="position: relative; overflow: hidden; background: linear-gradient(135deg, #3498db, #e74c3c); border: none; transition: transform 0.2s, filter 0.2s; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);">
+                          <span style="display: inline-flex; align-items: center; color: white;">
+                              <i class="bi bi-whatsapp me-2" style="font-size: 1.5rem;"></i> <!-- WhatsApp Icon -->
+                              Book Now
+                          </span>
+                      </a>
+                    </div>
+                  </div>
+                @endforeach
+              @else
+                <h3>Not Available Any Ballons In This Category</h3>
+              @endif
+
+            </div>
+
+
+            <!-- Mobile View More Button -->
+            <div class="card-footer d-md-none text-center">
+              <a href="{{ route('balloonsByCategory', $category->id) }}" class="btn btn-primary btn-view-more" style="border-radius: 20px; font-weight: bold; padding: 10px 20px; transition: background-color 0.3s, color 0.3s; background-color: #3498db; color: #fff; border: none;">
+                  View More
+              </a>
+            </div>
+          </div>
+        @endforeach
+      @else
+        <h3>Not Available Any Category</h3>
+      @endif
+
+
+
+
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {{-- <ul class="nav nav-tabs pt-4" role="tablist" data-aos="fade-up" data-aos-delay="100">
           <li class="nav-item pt-1">
             <a class="nav-link active" href="#day-1" role="tab" data-bs-toggle="tab">{{$balloonsByCategory[0]["categoryName"] ?? 'Not Available'}}</a>
           </li>
@@ -547,7 +618,9 @@
           <!-- End Schdule Day 7 -->
 
 
-        </div>
+        </div> --}}
+
+
 
       </div>
 

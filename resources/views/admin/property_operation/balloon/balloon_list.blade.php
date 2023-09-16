@@ -73,6 +73,122 @@
 
     <section class="section profile">
 
+    
+
+
+
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">
+            
+            
+            <!-- Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+  
+                <!-- <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+  
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div> -->
+                <div class="filter">
+  
+  
+  
+                  <form method="POST" action="{{ route('user.add.balloonCategory.post') }}" >
+                    @csrf
+                    <div class="row mb-3">
+                      <div class="col-md-4 col-lg-3 col-form-label">
+                        <button type="submit" class="btn btn-primary ml-4 mt-3">Add Category</button>
+                      </div>
+                      
+                      <div class="col-md-8 col-lg-9">
+                        <div class="row g-4">
+  
+                          <div class="col-md-6">
+                            <label for="category_name" class="form-label">Category Name</label>
+                            <input type="text" name="category_name" class="form-control @error('category_name') is-invalid @enderror" id="category_name" value="{{ old('category_name') }}" placeholder="Category Name">
+                            @error('category_name')
+                              <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                          </div>
+
+                          <div class="col-md-6">
+                          </div>
+                        
+  
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </form>
+  
+  
+  
+  
+  
+                </div>
+  
+                <div class="card-body">
+                  <h5 class="card-title">Category<span>| Balloon</span></h5>
+  
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">Category Name</th>
+                        <th scope="col">Operation</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    @if(isset($balloon_categories) && count($balloon_categories) > 0)
+                      @foreach($balloon_categories as $key => $category)
+                      <tr>
+                        <td>
+                          {{ $category->category_name }}
+                        </td>
+                        <td>
+                          <a href="{{ route('user.balloonCategory.edit', $category->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                          <a href="{{ route('user.balloonCategory.delete', $category->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete?')">Delete</a>
+                        </td>
+                      </tr>
+                      @endforeach
+                    @else
+                        <tr>
+                        <td colspan="6">No customer feedback available.</td>
+                      </tr>
+                    @endif
+  
+                      
+                    </tbody>
+                  </table>
+  
+                </div>
+  
+              </div>
+            </div><!-- End Recent Sales -->
+  
+          </div>
+        </div><!-- End Left side columns -->
+  
+        <!-- Right side columns -->
+        
+  
+      </div>
+
+
+
+
+
+
 
 
     <div class="row">
@@ -129,7 +245,7 @@
                           @endif
                         </a></td>
                         <td>
-                          Category: {{ $balloon->category }} </br> Quantity: {{ $balloon->quantity ?? 'Not available' }}, Size: {{ $balloon->size ?? 'Not available' }} </br> Shape: {{ $balloon->shape ?? '' }}, Brand: <img src="">
+                          Category: {!! $balloon->category ? $balloon->category->category_name : '<span style="color: red;">Not Available</span>' !!} </br> Quantity: {{ $balloon->quantity ?? 'Not available' }}, Size: {{ $balloon->size ?? 'Not available' }} </br> Shape: {{ $balloon->shape ?? '' }}, Brand: <img src="">
                           
                         </td>
                         <td>

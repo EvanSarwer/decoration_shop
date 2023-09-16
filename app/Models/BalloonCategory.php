@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\BalloonCategory;
+use App\Models\Balloon;
 
-class Balloon extends Model
+class BalloonCategory extends Model
 {
     use HasFactory;
     protected $guarded = [];
 
-    public function category(){
-        return $this->belongsTo(BalloonCategory::class,'category_id');
+
+    public function balloons(){
+        return $this->hasMany(Balloon::class, 'category_id');
     }
 }

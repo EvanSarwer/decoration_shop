@@ -506,7 +506,7 @@
                       <td>{{ $client_feedback->client_feedback ?? 'Feedback not available' }}</td>
                       <td>
                         <a href="{{ route('user.customerFeedback.delete', $client_feedback->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete?')">Delete</a>
-                        
+                      </td>
                     </tr>
                     @endforeach
                   @else

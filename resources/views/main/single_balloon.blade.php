@@ -60,7 +60,7 @@
                                     <span class="fw-bold text-info"><i class="bi bi-check2-circle"></i></span>
                                 </div>
                                 <div class="ps-3 pt-3">
-                                    <h6>Category- {{ $balloon->category ?? 'N/A' }}</h6>
+                                    <h6>Category- {{ $balloon->category ? $balloon->category->category_name : 'N/A' }}</h6>
                                 </div>
                             </div>
                         </div>

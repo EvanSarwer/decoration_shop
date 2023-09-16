@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Balloon;
+use App\Models\BalloonCategory;
 use App\Models\Holiday;
 use App\Models\Notification;
 use App\Models\Occasion;
@@ -18,18 +19,27 @@ class LandingPageController extends Controller
 
         $recent_balloons = Balloon::orderBy('created_at', 'desc')->limit(10)->get();
 
-        $balloonsByCategory = Balloon::orderBy('created_at', 'desc')
-                                    ->get()
-                                    ->groupBy('category')
-                                    ->take(7) // Limit to top 5 categories
-                                    ->map(function ($balloons, $categoryName) {
-                                        return [
-                                            'categoryName' => $categoryName,
-                                            'balloonList' => $balloons
-                                        ];
-                                    })
-                                    ->values()
-                                    ->all();
+        // $balloonsByCategory = Balloon::orderBy('created_at', 'desc')
+        //                             ->get()
+        //                             ->groupBy('category')
+        //                             ->take(7) // Limit to top 5 categories
+        //                             ->map(function ($balloons, $categoryName) {
+        //                                 return [
+        //                                     'categoryName' => $categoryName,
+        //                                     'balloonList' => $balloons
+        //                                 ];
+        //                             })
+        //                             ->values()
+        //                             ->all();
+
+        $balloonsByCategory = BalloonCategory::all();
+        if($balloonsByCategory && count($balloonsByCategory) > 0){
+            foreach($balloonsByCategory as $key => $category){
+                if(count($category->balloons) > 0){
+                    $category->balloons = $category->balloons->sortByDesc('featuring')->take(4);
+                }
+            }
+        }
 
         $holidays = Holiday::where('featuring','yes')->limit(4)->get();                         
 
@@ -154,6 +164,11 @@ class LandingPageController extends Controller
     public function balloons(){
         $balloons = Balloon::all();
         return view('main.balloons',compact('balloons'));
+    }
+
+    public function balloonsByCategory($id){
+        $balloonsByCategory = BalloonCategory::where('id', $id)->first();
+        return view('main.balloonsByCategory',compact('balloonsByCategory'));
     }
 
     public function singleBalloon($id){

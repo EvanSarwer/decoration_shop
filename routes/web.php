@@ -33,6 +33,7 @@ Route::post('/bookmessage', [LandingPageController::class, 'bookMessage'])->name
 Route::post('/sendmessage', [LandingPageController::class, 'sendMessage'])->name('send.message');
 
 Route::get('/balloons', [LandingPageController::class, 'balloons'])->name('balloons');
+Route::get('/balloons/category/{id}', [LandingPageController::class, 'balloonsByCategory'])->name('balloonsByCategory');
 Route::get('/single-balloon/{id}', [LandingPageController::class, 'singleBalloon'])->name('single.balloon');
 
 Route::get('/occasions', [LandingPageController::class, 'occasions'])->name('occasions');
@@ -98,6 +99,17 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
 
 
     // Start Balloon Operations
+
+    Route::post('/user/balloonCategory/add', [PropertyOperationController::class, 'AddBalloonCategoryPost'])->name('user.add.balloonCategory.post');
+
+    Route::get('/user/balloonCategory/delete/{id}', [PropertyOperationController::class, 'BalloonCategoryDelete'])->name('user.balloonCategory.delete');
+
+    Route::get('/user/balloonCategory/edit/{id}', [PropertyOperationController::class, 'BalloonCategoryEditView'])->name('user.balloonCategory.edit');
+
+    Route::post('/user/balloonCategory/edit', [PropertyOperationController::class, 'BalloonCategoryEditPost'])->name('user.balloonCategory.edit.post');
+
+
+    ///
     Route::get('/user/balloons', [PropertyOperationController::class, 'BalloonList'])->name('user.balloons');
 
     Route::get('/user/balloon/create', [PropertyOperationController::class, 'BalloonCreateView'])->name('user.balloon.create');

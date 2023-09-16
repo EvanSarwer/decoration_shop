@@ -139,10 +139,18 @@
                     </div>
 
                     <div class="row mb-3">
-                      <label for="category" class="col-md-4 col-lg-3 col-form-label">Category</label>
+                      <label for="category_id" class="col-md-4 col-lg-3 col-form-label">Category</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="category" type="text" class="form-control @error('category') is-invalid @enderror" id="category" value="{{ old('category') }}">
-                        @error('category')
+                        {{-- <input name="category" type="text" class="form-control @error('category') is-invalid @enderror" id="category" value="{{ old('category') }}"> --}}
+                        <select class="form-select @error('category_id') is-invalid @enderror" name="category_id" aria-label="Select a category" id="category_id">
+                          <option value="" selected>Choose a balloon category</option>
+                          @foreach ($balloon_categories as $category)
+                              <option value="{{ $category['id'] }}" {{ old('category_id') == $category['id'] ? 'selected' : '' }}>
+                                  {{ $category['category_name'] }}
+                              </option>
+                          @endforeach
+                        </select>
+                        @error('category_id')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
                       </div>

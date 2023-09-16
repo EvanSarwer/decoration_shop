@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Balloon;
+use App\Models\BalloonCategory;
 use App\Models\Holiday;
 use App\Models\Occasion;
 use App\Models\PageProperty;
@@ -13,22 +14,80 @@ use Intervention\Image\Facades\Image;
 
 class PropertyOperationController extends Controller
 {
+
+    // Start Balloon Category
+
+    public function AddBalloonCategoryPost(Request $request){
+        // Validation
+        $request->validate([
+            'category_name' => 'required|min:1|unique:balloon_categories,category_name',
+        ]);
+
+        $balloon_category = new BalloonCategory();
+        $balloon_category->category_name = $request->category_name;
+        $balloon_category->save();
+
+        $notification = array(
+            'message' => 'Balloon Category Added Successfully',
+            'alert-type' => 'success',
+        );
+        return back()->with($notification);
+
+    }
+
+    public function BalloonCategoryDelete($id){
+        $balloon_category = BalloonCategory::findOrFail($id);
+        $balloon_category->delete();
+
+        $notification = array(
+            'message' => 'Balloon Category Deleted Successfully',
+            'alert-type' => 'success',
+        );
+        return back()->with($notification);
+    }
+
+    public function BalloonCategoryEditView($id){
+        $balloon_category = BalloonCategory::findOrFail($id);
+        return view('admin.property_operation.balloon.category_edit',compact('balloon_category'));
+    }
+
+    public function BalloonCategoryEditPost(Request $request){
+        // Validation
+        $request->validate([
+            'id' => 'required',
+            'category_name' => 'required|min:1|unique:balloon_categories,category_name,'.$request->id,
+        ]);
+
+        $balloon_category = BalloonCategory::findOrFail($request->id);
+        $balloon_category->category_name = $request->category_name;
+        $balloon_category->save();
+
+        $notification = array(
+            'message' => 'Balloon Category Updated Successfully',
+            'alert-type' => 'success',
+        );
+        return redirect('/user/balloons')->with($notification);
+    }
+
+
     // Start Balloon 
     public function BalloonList(){
         $balloons = Balloon::latest()->get();
 
-        return view('admin.property_operation.balloon.balloon_list',compact('balloons'));
+        $balloon_categories = BalloonCategory::all();
+        return view('admin.property_operation.balloon.balloon_list',compact('balloons','balloon_categories'));
     }
 
     public function BalloonCreateView(){
-        return view('admin.property_operation.balloon.balloon_create');
+        $balloon_categories = BalloonCategory::all();
+        return view('admin.property_operation.balloon.balloon_create',compact('balloon_categories'));
     }
 
     public function BalloonCreatePost(Request $request){
         // Validation
         $request->validate([
             'title' => 'required',
-            'category' => 'required',
+            'category_id' => 'required|integer',
             'price' => ['required', 'numeric', 'min:0', 
                             function ($attribute, $value, $fail) {
                                 $value = floatval($value);
@@ -56,7 +115,7 @@ class PropertyOperationController extends Controller
         $balloon = new Balloon();
         $balloon->title = $request->title;
         $balloon->description = $request->description;
-        $balloon->category = $request->category;
+        $balloon->category_id = $request->category_id;
         $balloon->size = $request->size;
         $balloon->brand = $request->brand;
         $balloon->shape = $request->shape;
@@ -103,7 +162,8 @@ class PropertyOperationController extends Controller
 
     public function BalloonEditView($id){
         $balloon = Balloon::findOrFail($id);
-        return view('admin.property_operation.balloon.balloon_edit',compact('balloon'));
+        $balloon_categories = BalloonCategory::all();
+        return view('admin.property_operation.balloon.balloon_edit',compact('balloon','balloon_categories'));
     }
 
     public function BalloonEditPost(Request $request){
@@ -112,7 +172,7 @@ class PropertyOperationController extends Controller
         $request->validate([
             'id' => 'required',
             'title' => 'required',
-            'category' => 'required',
+            'category_id' => 'required|integer',
             'price' => ['required', 'numeric', 'min:0', 
                             function ($attribute, $value, $fail) {
                                 $value = floatval($value);
@@ -139,7 +199,7 @@ class PropertyOperationController extends Controller
         $balloon = Balloon::findOrFail($request->id);
         $balloon->title = $request->title;
         $balloon->description = $request->description;
-        $balloon->category = $request->category;
+        $balloon->category_id = $request->category_id;
         $balloon->size = $request->size;
         $balloon->brand = $request->brand;
         $balloon->shape = $request->shape;
